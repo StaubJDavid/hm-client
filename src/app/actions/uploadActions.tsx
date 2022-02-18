@@ -14,6 +14,7 @@ export const addImages = (files:any,images_length:number) => (dispatch:any) => {
     Object.keys(files).map((key:any) => {
         let f:any = {};
         f['index'] = images_length;
+        f['message'] = images_length+"xddd";
         images_length++
         f['file'] = files[key];
         // console.log(files[key]);
@@ -56,11 +57,9 @@ export const uploadImages = (files:any,container_id:string) => (dispatch:any) =>
     files.map((f:any,i:number) => {
         f.file.createdIndex = i;
         console.log(f.file);
+        formData.append('data',f.message);
         return formData.append('photos',f.file);
     })
-
-    formData.append('data', "kaka1");
-    formData.append('data', "kaka2");
 
     axios.post(`/api/image/multiple/${container_id}`, formData)
     .then (res => {

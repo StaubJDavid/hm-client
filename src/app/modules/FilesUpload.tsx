@@ -13,11 +13,6 @@ type Props = {
 }
 
 type State = {
-    name: string,
-    price: string,
-    selectedFile: string,
-    filename: string,
-    files:any
 }
 
 class FilesUpload extends Component<Props,State> {
@@ -25,11 +20,6 @@ class FilesUpload extends Component<Props,State> {
         super(props);
 
         this.state = {
-            name: '',
-            price: '',
-            selectedFile: '',
-            filename: '',
-            files:{}
         }
         this.onChange = this.onChange.bind(this);
         this.deleteImage = this.deleteImage.bind(this);
@@ -38,89 +28,30 @@ class FilesUpload extends Component<Props,State> {
     componentDidMount(){
         this.props.clearImages();
     }
-    
-    handleChange = (event:any) => {
-        this.setState({
-           name: "dsadsa",
-           price: "321312sad"
-        })
-    }
 
     onChange(e:any){
         this.setState({[String(e.target.name)]: String(e.target.value)} as any);
     }
     
     fileSelectedHandler = (e:any) => {
-        /*console.log(event.target.files[0]);
-        console.log(event.target.value);
-        this.setState({preview: URL.createObjectURL(event.target.files[0])})
-        let file = event.target.files[0].name;
-        this.setState({
-            selectedFile: event.target.files[0],
-            filename: file
-        })
-        console.log(file);*/
-        /*this.setState({files:e.target.files});
-        console.log(e.target.files);*/
         console.log(e.target.files);
         this.props.addImages(e.target.files, this.props.upload.images.length);
     }
 
     deleteImage = (e:any) => {
-        /*console.log(event.target.files[0]);
-        console.log(event.target.value);
-        this.setState({preview: URL.createObjectURL(event.target.files[0])})
-        let file = event.target.files[0].name;
-        this.setState({
-            selectedFile: event.target.files[0],
-            filename: file
-        })
-        console.log(file);*/
-        /*this.setState({files:e.target.files});
-        console.log(e.target.files);*/
         console.log(e);
         this.props.deleteImage(e, this.props.upload.images);
     }
     
     fileUploadHandler = (event:any) => {
         event.preventDefault();        
-
-        /*let formData = new FormData();
-        
-        Object.keys(this.state.files).map((key:any) => {
-            return formData.append('photos', this.state.files[key]);
-        })
-        
-        let container_id = 'salamon'
-        axios.post(`/api/image/multiple/${container_id}`, formData)
-        .then (res => {
-            console.log(res.data);
-            console.log(formData);
-        })*/
-        /*console.log("Submit Files");
-        console.log(this.props.upload.images);*/
-        this.props.uploadImages(this.props.upload.images, "target");
+        this.props.uploadImages(this.props.upload.images, "512657f5-2d95-41b5-aacc-564dfe934e3e");
     }
 
     render () {
         return (
             <div>
                 <form encType="multipart/form">
-                    <input 
-                        type="text" 
-                        name="name" 
-                        id="name" 
-                        placeholder="Name of the product" 
-                        onChange={this.onChange}
-                    />
-                    <br/>
-                    <input 
-                        type="text" 
-                        name="price" 
-                        id="price" 
-                        placeholder="Price" 
-                        onChange={this.onChange}
-                    />
                     <br/>
                     <input 
                         type="file" 
