@@ -4,8 +4,8 @@ import setAuthToken from '../helpers/setAuthToken';
 import jwt_decode from 'jwt-decode';
 
 export const registerUser = (userData:any, history:any) => (dispatch:any) => {
-    axios.post(`${process.env.REACT_APP_API_URL}/api/auth/register`, 
-        {nickname: userData.nickname,
+    axios.post(`/api/auth/register`, 
+        {name: userData.name,
         email: userData.email,
         password: userData.password,
         password2: userData.password2}
@@ -20,7 +20,7 @@ export const registerUser = (userData:any, history:any) => (dispatch:any) => {
 };
 
 export const loginUser = (userData:any) => (dispatch:any) => {
-    axios.post(`${process.env.REACT_APP_API_URL}/api/auth/login`, 
+    axios.post(`/api/auth/login`, 
         {email: userData.email,
         password: userData.password}
     ).then(

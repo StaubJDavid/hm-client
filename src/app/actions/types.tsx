@@ -6,3 +6,7 @@ export const CLEAR_ERRORS = 'CLEAR_ERRORS';
 //AUTH TYPES
 export const SET_CURRENT_USER = 'SET_CURRENT_USER';
 
+//UPLOAD TYPES
+export const ADD_IMAGES = 'ADD_IMAGES';
+export const CLEAR_IMAGES = 'CLEAR_IMAGES';
+export const DELETE_IMAGE = 'DELETE_IMAGE';

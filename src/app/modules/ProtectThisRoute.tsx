@@ -2,15 +2,13 @@ import React, { Component} from 'react';
 import {connect} from 'react-redux';
 
 type Props = {
-    first:number,
-    auth:any,
 }
 
 type State = {
 
 }
 
-class FirstPage extends Component<Props,State> {
+class ProtectThisRoute extends Component<Props,State> {
     constructor(props:any){
         super(props);
 
@@ -26,14 +24,13 @@ class FirstPage extends Component<Props,State> {
     render() {
         return (
             <div>
-                Authenticated: {String(this.props.auth.isAuthenticated)}
+                This is a protected Route
             </div>
         )
     }
 }
 
 const mapStateToProps = (state:any)=>({
-    auth: state.auth
 });
 
-export default connect(mapStateToProps,{})(FirstPage);
+export default connect(mapStateToProps,{})(ProtectThisRoute);
