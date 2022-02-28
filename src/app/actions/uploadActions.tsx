@@ -2,10 +2,10 @@ import axios from 'axios';
 import {GET_ERRORS,
         ADD_IMAGES,
         CLEAR_IMAGES,
-        DELETE_IMAGE
+        DELETE_IMAGE,
+        GET_CONTAINER
     } from './types';
-import setAuthToken from '../helpers/setAuthToken';
-import jwt_decode from 'jwt-decode';
+import {getContainer} from './containerActions';
 
 export const addImages = (files:any,images_length:number) => (dispatch:any) => {
 
@@ -63,8 +63,7 @@ export const uploadImages = (files:any,container_id:string) => (dispatch:any) =>
 
     axios.post(`/api/image/multiple/${container_id}`, formData)
     .then (res => {
-        console.log(res.data);
-        console.log(formData);
+        dispatch(getContainer(container_id));
     }).catch(
         err => dispatch({
             type: GET_ERRORS,

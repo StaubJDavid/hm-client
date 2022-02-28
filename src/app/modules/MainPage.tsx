@@ -1,8 +1,8 @@
 import React, { Component} from 'react';
 import {connect} from 'react-redux';
+import CreateContainer from './Container/CreateContainer';
 
 type Props = {
-    first:number,
     auth:any,
 }
 
@@ -10,7 +10,7 @@ type State = {
 
 }
 
-class FirstPage extends Component<Props,State> {
+class MainPage extends Component<Props,State> {
     constructor(props:any){
         super(props);
 
@@ -26,6 +26,7 @@ class FirstPage extends Component<Props,State> {
     render() {
         return (
             <div>
+                {this.props.auth.isAuthenticated?<CreateContainer />:<></>}
                 Authenticated: {String(this.props.auth.isAuthenticated)}
             </div>
         )
@@ -36,4 +37,4 @@ const mapStateToProps = (state:any)=>({
     auth: state.auth
 });
 
-export default connect(mapStateToProps,{})(FirstPage);
+export default connect(mapStateToProps,{})(MainPage);

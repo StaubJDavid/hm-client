@@ -1,16 +1,25 @@
 import axios from 'axios';
-import {GET_ERRORS, SET_CURRENT_USER} from './types';
+import {GET_ERRORS, SET_CURRENT_USER, CLEAR_ERRORS} from './types';
 import setAuthToken from '../helpers/setAuthToken';
 import jwt_decode from 'jwt-decode';
+import { useNavigate } from "react-router-dom";
+import history from "../helpers/history";
 
-export const registerUser = (userData:any, history:any) => (dispatch:any) => {
+export const registerUser = (userData:any) => (dispatch:any) => {
     axios.post(`/api/auth/register`, 
         {name: userData.name,
         email: userData.email,
         password: userData.password,
-        password2: userData.password2}
+        password2: userData.password2,
+        message: userData.message
+    }
     ).then(
-        res => history.push('/login')
+        res => {
+            dispatch({
+                type: GET_ERRORS,
+                payload: {register:"s"}
+            })
+        }
     ).catch(
         err => dispatch({
             type: GET_ERRORS,
@@ -49,4 +58,10 @@ export const logoutUser = () => (dispatch:any) => {
     localStorage.removeItem('JWT');
     setAuthToken(false);
     dispatch(setCurrentUser({}));
+}
+
+export const scuffed = () => (dispatch:any) => {
+    dispatch({
+        type: CLEAR_ERRORS
+    })
 }

@@ -1,18 +1,25 @@
-import React, {Component} from 'react';import './App.css';
+import React, {Component} from 'react';
+import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import {BrowserRouter as Router, Route, Routes, Navigate} from 'react-router-dom';
 import {Provider} from 'react-redux';
 import store from './store';
 import jwt_decode from 'jwt-decode';
 import setAuthToken from './helpers/setAuthToken';
 import {setCurrentUser, logoutUser} from './actions/authActions';
+import history from "./helpers/history";
+
+import {WrappedContainer} from './common/withRouter';
 
 //import Routing from './modules/Routing/Routing';
 import Login from './modules/Authentication/Login';
 import Register from './modules/Authentication/Register';
-import FirstPage from './modules/FirstPage';
+import MainPage from './modules/MainPage';
+import Container from './modules/Container/Container';
 import ProtectThisRoute from './modules/ProtectThisRoute';
 import FileUpload from './modules/FileUpload';
 import FilesUpload from './modules/FilesUpload';
+import Navbar from './modules/Layout/Navbar';
 
 if(localStorage.JWT){
   setAuthToken(localStorage.JWT);
@@ -31,10 +38,22 @@ class App extends Component  {
     return (
       <Provider store={store}>
         <Router>
+          <Navbar />
           <Routes>
-            <Route path="/" element={<FirstPage first={1}/>} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
+            <Route path="/" element={<MainPage />} />
+            <Route path="/container/:c_id" element={<WrappedContainer />} />
+            {/*element={withRouter(<Container />)} */}
+            <Route path="/login" element={
+              <RedirectIfAuth redirectTo="/" >
+                <Login />
+              </RedirectIfAuth>
+            } />
+            <Route path="/register" element={
+              <RedirectIfAuth redirectTo="/" >
+                <Register />
+              </RedirectIfAuth>
+            } />
+
             <Route path="/images" element={<FilesUpload />} />
             <Route path="/protected" element={
               <RequireAuth redirectTo="/login" >
@@ -57,6 +76,11 @@ class App extends Component  {
 function RequireAuth({children, redirectTo}:any){
   let isAuthenticated = store.getState().auth.isAuthenticated;
   return isAuthenticated?children:<Navigate to={redirectTo} />;
+}
+
+function RedirectIfAuth({children, redirectTo}:any){
+  let isAuthenticated = store.getState().auth.isAuthenticated;
+  return isAuthenticated?<Navigate to={redirectTo} />:children;
 }
 
 export default App;
