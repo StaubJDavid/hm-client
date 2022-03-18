@@ -1,72 +1,52 @@
-import React, { Component} from 'react';
+import React, { FC, useState, useEffect} from 'react';
 import {connect} from 'react-redux';
-import {createContainer} from '../../actions/containerActions';
+import {createContainer, clearContainer} from '../../actions/containerActions';
+import { useNavigate } from 'react-router-dom';
 import TextInput from '../../common/TextInput';
 import TextArea from '../../common/TextArea';
 import SelectList from '../../common/SelectList';
 import "bootstrap/js/src/collapse.js";
 import { Navigate } from 'react-router-dom';
+import isEmpty from '../../helpers/isEmpty';
 
 type Props = {
     errors:any,
-    container:any,
-    createContainer:any
-}
+    createContainer:any,
+    clearContainer:any
+};
 
-type State = {
-    role:any,
-    title:any,
-    message:any,
-    time_start:any,
-    time_end:any,
-    errors: any
-}
+const CreateContainer: FC<Props> = ({errors,createContainer,clearContainer}) => {
+    const navigate = useNavigate();
 
-class CreateContainer extends Component<Props,State> {
-    constructor(props:any){
-        super(props);
-
-        this.state = {
-            role:'tour',
-            title:'',
-            message:'',
-            time_start:'',
-            time_end:'',
-            errors:{}
-        }
-     
-        this.onChange = this.onChange.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
-    }
-
-    onChange(e:any){
-        this.setState({[String(e.target.name)]: String(e.target.value)} as any);
-    }
-
-    onSubmit(e:any){
+    const [role, setRole] = useState("tour");
+    const [title, setTitle] = useState("");
+    const [message, setMessage] = useState("");
+    const [time_start, setTimeStart] = useState("");
+    const [time_end, setTimeEnd] = useState("");
+    const [options, setOptions] = useState([{name: 'Túra', value:'tour'},
+                                            {name: 'Album', value:'album'}]);
+    
+    const onSubmit = async (e:any) => {
         e.preventDefault();
 
         const container = {
-            role: this.state.role,
-            title: this.state.title,
-            message: this.state.message,
-            time_start: this.state.time_start,
-            time_end: this.state.time_end
+            role: role,
+            title: title,
+            message: message,
+            time_start: time_start,
+            time_end: time_end
         }
 
-        this.props.createContainer(container);
+        const createSuccess = await createContainer(container);
+        //console.log(createSuccess);
+        console.log(createSuccess);
+        if(createSuccess !== ""){
+            navigate(`/container/${createSuccess}`);
+        }
     }
 
-    render() {
-        const {errors} = this.state;
-
-        const options = [
-            {name: 'Túra', value:'tour'},
-            {name: 'Album', value:'album'},
-        ]
-
-        return (
-            <>
+    return (
+        <>
             <button className="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#collapseContainerCreate" aria-expanded="false" aria-controls="collapseContainerCreate">Create Container</button>
                 <div> 
                     <div className="collapse" id="collapseContainerCreate">
@@ -74,36 +54,36 @@ class CreateContainer extends Component<Props,State> {
                             <div className="row">
                                 <div className="col-md-8 m-auto">
                                     <p className="lead text-center">Create container</p>
-                                    <form onSubmit={this.onSubmit}>
+                                    <form onSubmit={(e:any) => onSubmit(e)}>
                                         <TextInput
                                             name="title" 
-                                            value={this.state.title}
+                                            value={title}
                                             error={errors.title} 
                                             type="text"
-                                            onChange={this.onChange}  
+                                            onChange={(e:any) => setTitle(e.target.value)}  
                                             placeholder="Title"
                                         />
                                         <TextArea
                                             name="message" 
                                             maxlength={2048}
-                                            value={this.state.message}
+                                            value={message}
                                             error={errors.message} 
-                                            onChange={this.onChange}  
+                                            onChange={(e:any) => setMessage(e.target.value)}  
                                             placeholder="Plan"
                                         />
                                         <SelectList
                                             name="role" 
-                                            value={this.state.role}
+                                            value={role}
                                             error={errors.role} 
-                                            onChange={this.onChange}  
+                                            onChange={(e:any) => setRole(e.target.value)}  
                                             options={options}
                                             placeholder="Container Type"
                                         />
                                         <p>Start Time:</p>
-                                        <input onChange={this.onChange} type="datetime-local" name="time_start"></input>
+                                        <input onChange={(e:any) => setTimeStart(e.target.value)} type="datetime-local" name="time_start"></input>
                                         
                                         <p>End Time:</p>
-                                        <input onChange={this.onChange} type="datetime-local" name="time_end"></input>
+                                        <input onChange={(e:any) => setTimeEnd(e.target.value)} type="datetime-local" name="time_end"></input>
                                         
                                         <input type="submit" className="btn btn-info btn-block mt-4" />
                                     </form>
@@ -112,15 +92,12 @@ class CreateContainer extends Component<Props,State> {
                         </div>
                     </div>
                 </div>
-                {this.props.container.currentContainer.container_id?<Navigate to={`/container/${this.props.container.currentContainer.container_id}`} />:<></>}
             </>
-        )
-    }
-}
+    )
+};
 
 const mapStateToProps = (state:any)=>({
-    errors:state.errors,
-    container: state.container
+    errors:state.errors
 });
 
-export default connect(mapStateToProps,{createContainer})(CreateContainer);
+export default connect(mapStateToProps, {createContainer,clearContainer})(CreateContainer);

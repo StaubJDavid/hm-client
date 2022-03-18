@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import Container from '../modules/Container/Container';
+import ContainerPage from '../modules/Container/ContainerPage';
 
 /*export const withRouter = (Component:any) => {
   const Wrapper = (props:any) => {
@@ -18,11 +18,11 @@ import Container from '../modules/Container/Container';
   return Wrapper;
 };*/
 
-export const WrappedContainer = (props:any) => {
+/*export const WrappedContainer = (props:any) => {
   const navigate = useNavigate();
   const params = useParams();
 
   return (
-    <Container navigate={navigate} params={params} {...props} />
+    <ContainerPage navigate={navigate} params={params} {...props} />
   );
-}
+}*/

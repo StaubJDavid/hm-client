@@ -9,13 +9,13 @@ import setAuthToken from './helpers/setAuthToken';
 import {setCurrentUser, logoutUser} from './actions/authActions';
 import history from "./helpers/history";
 
-import {WrappedContainer} from './common/withRouter';
+//import {WrappedContainer} from './common/withRouter';
 
 //import Routing from './modules/Routing/Routing';
 import Login from './modules/Authentication/Login';
 import Register from './modules/Authentication/Register';
 import MainPage from './modules/MainPage';
-import Container from './modules/Container/Container';
+import ContainerPage from './modules/Container/ContainerPage';
 import ProtectThisRoute from './modules/ProtectThisRoute';
 import FileUpload from './modules/FileUpload';
 import FilesUpload from './modules/FilesUpload';
@@ -41,7 +41,7 @@ class App extends Component  {
           <Navbar />
           <Routes>
             <Route path="/" element={<MainPage />} />
-            <Route path="/container/:c_id" element={<WrappedContainer />} />
+            {/*<Route path="/container/:c_id" element={<WrappedContainer />} />*/}
             {/*element={withRouter(<Container />)} */}
             <Route path="/login" element={
               <RedirectIfAuth redirectTo="/" >
@@ -66,6 +66,13 @@ class App extends Component  {
                 <FileUpload />
               </RequireAuth>
             } />
+
+            <Route path="/container/:c_id" element={<ContainerPage />} />
+            {/*<Route path="/container/:c_id" element={
+              <RequireAuth redirectTo="/login" >
+                <ContainerPage />
+              </RequireAuth>
+            } />*/}
           </Routes>
         </Router>
       </Provider>

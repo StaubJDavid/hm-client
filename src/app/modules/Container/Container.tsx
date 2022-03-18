@@ -1,81 +1,37 @@
-import React, { Component} from 'react';
+import React, { FC, useEffect} from 'react';
 import {connect} from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import {getContainer} from '../../actions/containerActions';
 import AddImagesButton from '../Images/AddImagesButton';
 import ShowImages from '../Images/ShowImages';
+import timeFormat from '../../helpers/timeFormat';
 
 type Props = {
-    container:any,
-    navigate:any,
-    params:any,
-    getContainer:any
-}
+    container:any
+};
 
-type State = {
+const Container: FC<Props> = ({container}) => {
+    const navigate = useNavigate();
 
-}
-
-class ClassCompWithConnect extends Component<Props,State> {
-    constructor(props:any){
-        super(props);
-
-        this.state = {
-
-        }
-        
+    let {container_id,creator_id,role,title,message,created,time_start,time_end} = container;
+    function handleClick() {
+        navigate(`/container/${container_id}`)
     }
-
-    componentDidMount(){
-        //console.log("Mount");
-        let url = window.location.href;
-        url = url.slice(url.lastIndexOf('/')+1,url.length);
-        this.props.getContainer(url);
-        //console.log(this.props)
-    }
-
-    componentDidUpdate(prevProps:any){
-        if(this.props.params.c_id!== prevProps.params.c_id){
-            let url = window.location.href;
-            url = url.slice(url.lastIndexOf('/')+1,url.length);
-            this.props.getContainer(url);
-        }
-    }
-
-    render() {
-        let {currentContainer} = this.props.container;
-
-        let profileContent = <></>;
-
-        if(currentContainer.creator_id){
-            let {container_id,creator_id,role,title,message,created,time_start,time_end,name,images} = currentContainer;
-            profileContent = (
-                <>
-                    <div>Container id: {container_id}</div>
-                    <div>creator_id: {creator_id}</div>
-                    <div>role: {role}</div>
-                    <div>title: {title}</div>
-                    <div>message: {message}</div>
-                    <div>created: {created}</div>
-                    <div>time_start: {time_start}</div>
-                    <div>time_end: {time_end}</div>
-                    <div>name: {name}</div>
-                    <AddImagesButton container_id={container_id} />
-                    <hr/>
-                    {<ShowImages />}
-                </>
-            )
-        }
-        //console.log(currentContainer);
-        return (
-            <div>
-                {profileContent}
-            </div>
-        )
-    }
-}
+    return (
+        <div className="mb-5" onClick={handleClick}>
+            <div>Container id: {container_id}</div>
+            <div>creator_id: {creator_id}</div>
+            <div>role: {role}</div>
+            <div>title: {title}</div>
+            <div>message: {message}</div>
+            <div>created: {timeFormat(created)}</div>
+            <div>time_start: {timeFormat(time_start)}</div>
+            <div>time_end: {timeFormat(time_end)}</div>
+        </div>
+    )
+};
 
 const mapStateToProps = (state:any)=>({
-    container: state.container
 });
 
-export default connect(mapStateToProps,{getContainer})(ClassCompWithConnect);
+export default connect(mapStateToProps, {})(Container);

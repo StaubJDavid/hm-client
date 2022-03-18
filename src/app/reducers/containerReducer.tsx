@@ -1,5 +1,7 @@
 /* eslint-disable import/no-anonymous-default-export */
-import { GET_CONTAINERS,
+import { SET_UPCOMING_CONTAINERS,
+    SET_PAST_CONTAINERS,
+    SET_INPROGRESS_CONTAINERS,
     GET_CONTAINER,
     CREATE_CONTAINER,
     DELETE_CONTAINER,
@@ -10,14 +12,24 @@ import isEmpty from "../helpers/isEmpty";
 
 const initialState = {
     currentContainer: {},
-    containers: {}
+    upcomingContainers: {},
+    pastContainers: {},
+    inProgressContainers: {}
 }
 
 export default function(state = initialState, action:any){
     switch(action.type){
-        case GET_CONTAINERS: return {
+        case SET_UPCOMING_CONTAINERS: return {
             ...state,
-            containers:action.payload
+            upcomingContainers:action.payload
+        }
+        case SET_PAST_CONTAINERS: return {
+            ...state,
+            pastContainers:action.payload
+        }
+        case SET_INPROGRESS_CONTAINERS: return {
+            ...state,
+            inProgressContainers:action.payload
         }
         case GET_CONTAINER: return {
             ...state,
@@ -31,7 +43,7 @@ export default function(state = initialState, action:any){
 
         case CLEAR_CONTAINER: return {
             ...state,
-            currentContainer:action.payload
+            currentContainer:{}
         }
 
         case DELETE_CONTAINER: return {

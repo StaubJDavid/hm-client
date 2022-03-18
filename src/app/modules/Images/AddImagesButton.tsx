@@ -67,7 +67,7 @@ class AddImagesButton extends Component<Props,State> {
                     <button 
                         type="submit" 
                         onClick={this.fileUploadHandler}
-                    >Add Products</button>
+                    >Add Images</button>
                 </form>
                 
                 <div>
