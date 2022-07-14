@@ -8,6 +8,7 @@ import PageNavBar from '../../common/Pagination/PageNavBar';
 import isEmpty from '../../helpers/isEmpty';
 
 import {SET_PAST_CONTAINERS} from '../../actions/types';
+import calculateMaxPage from '../../helpers/calculateMaxPage';
 
 type Props = {
     pastContainers:any,
@@ -47,7 +48,7 @@ const PastContainers: FC<Props> = ({pastContainers,getPastContainers}) => {
                     {!isEmpty(pastContainers)?pastContainers.data.map((c:any) => {
                         return <Container container={c} />
                     }):<></>}
-                    <PageNavBar passedFc={handleSearch} currentPage={currentPage} maxPage={Math.trunc(pastContainers.total/pastContainers.limit) + 1} />
+                    <PageNavBar passedFc={handleSearch} currentPage={currentPage} maxPage={calculateMaxPage(pastContainers.total,pastContainers.limit)} />
                 </>
             )
         }

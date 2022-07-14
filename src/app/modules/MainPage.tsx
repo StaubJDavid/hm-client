@@ -5,8 +5,16 @@ import PageNavBar from '../common/Pagination/PageNavBar';
 import UpcomingContainers from './Container/UpcomingContainers';
 import PastContainers from './Container/PastContainers';
 import InProgressContainers from './Container/InProgressContainers';
-//import {getContainers} from '../actions/containerActions';
+//import { GoogleMap, useJsApiLoader,Autocomplete, LoadScript} from '@react-google-maps/api';
 import isEmpty from '../helpers/isEmpty';
+import MapTest from './MapTest';
+/*const containerStyle = {
+    width: '400px',
+    height: '400px'
+  };*/
+  
+
+//import {getContainers} from '../actions/containerActions';
 //import UpcomingContainers from './Container/UpcomingContainers';
 //import Containers from './Container/Containers';
 
@@ -25,11 +33,11 @@ const MainPage: FC<Props> = ({auth}) => {
         <div>
             {auth.isAuthenticated?<CreateContainer />:<></>}
             Authenticated: {String(auth.isAuthenticated)}
-            {auth.isAuthenticated?<>
-                <button onClick={() => setTourContainers(<UpcomingContainers />)}>Upcoming Tours</button>
-                <button onClick={() => setTourContainers(<InProgressContainers />)}>In Progress Tours</button>
-                <button onClick={() => setTourContainers(<PastContainers />)}>Past Tours</button>
-            </>:<></>}
+            {/*<MapTest />*/}
+
+            <button onClick={() => setTourContainers(<UpcomingContainers />)}>Upcoming Tours</button>
+            <button onClick={() => setTourContainers(<InProgressContainers />)}>In Progress Tours</button>
+            <button onClick={() => setTourContainers(<PastContainers />)}>Past Tours</button>
             <br />
             {tourContainers}
             {/*!isEmpty(containers)?<Containers />:<></>*/}

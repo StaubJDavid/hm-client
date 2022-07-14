@@ -32,6 +32,8 @@ const PageNavBar: FC<Props> = ({passedFc, currentPage, maxPage}) => {
     <div>
       <nav aria-label="Page navigation example">
         {renderNavbar()}
+        {console.log(currentPage)}
+        {console.log(maxPage)}
       </nav>
     </div>
   )

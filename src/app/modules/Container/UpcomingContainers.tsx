@@ -6,6 +6,7 @@ import ShowImages from '../Images/ShowImages';
 import Container from './Container';
 import PageNavBar from '../../common/Pagination/PageNavBar';
 import isEmpty from '../../helpers/isEmpty';
+import calculateMaxPage from '../../helpers/calculateMaxPage';
 
 import {SET_UPCOMING_CONTAINERS} from '../../actions/types';
 
@@ -48,7 +49,7 @@ const UpcomingContainers: FC<Props> = ({upcomingContainers,getUpcomingContainers
                     {!isEmpty(upcomingContainers)?upcomingContainers.data.map((c:any) => {
                         return <Container container={c} />
                     }):<></>}
-                    <PageNavBar passedFc={handleSearch} currentPage={currentPage} maxPage={Math.trunc(upcomingContainers.total/upcomingContainers.limit) + 1} />
+                    <PageNavBar passedFc={handleSearch} currentPage={currentPage} maxPage={calculateMaxPage(upcomingContainers.total,upcomingContainers.limit)} />
                 </>
             )
         }

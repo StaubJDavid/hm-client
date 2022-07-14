@@ -8,6 +8,7 @@ import PageNavBar from '../../common/Pagination/PageNavBar';
 import isEmpty from '../../helpers/isEmpty';
 
 import {SET_INPROGRESS_CONTAINERS} from '../../actions/types';
+import calculateMaxPage from '../../helpers/calculateMaxPage';
 
 type Props = {
     inProgressContainers:any,
@@ -47,7 +48,7 @@ const InProgressContainers: FC<Props> = ({inProgressContainers,getInProgressCont
                     {!isEmpty(inProgressContainers)?inProgressContainers.data.map((c:any) => {
                         return <Container container={c} />
                     }):<></>}
-                    <PageNavBar passedFc={handleSearch} currentPage={currentPage} maxPage={Math.trunc(inProgressContainers.total/inProgressContainers.limit) + 1} />
+                    <PageNavBar passedFc={handleSearch} currentPage={currentPage} maxPage={calculateMaxPage(inProgressContainers.total,inProgressContainers.limit)} />
                 </>
             )
         }

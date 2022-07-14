@@ -3,10 +3,12 @@ import authReducer from './authReducer';
 import containerReducer from './containerReducer';
 import errorReducer from './errorReducer';
 import uploadReducer from './uploadReducer';
+import googleMapsReducer from './googleMapsReducer';
 
 export default combineReducers({
     auth: authReducer,
     errors: errorReducer,
     upload: uploadReducer,
-    container: containerReducer
+    container: containerReducer,
+    maps: googleMapsReducer
 });
