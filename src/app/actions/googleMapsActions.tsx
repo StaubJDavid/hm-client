@@ -7,7 +7,8 @@ import {GET_ERRORS,
     SET_STARTPOINT,
     SET_WAYPOINTS,
     DEL_WAYPOINTS,
-    SET_DIRECTION_RESULTS
+    SET_DIRECTION_RESULTS,
+    CLEAR_MAPS
     } from './types';
 
 import inputTimeFormat from '../helpers/inputTimeFormat';
@@ -97,6 +98,23 @@ export const delWaypoint = (index:number) => (dispatch:any) => {
         oldWaypoints.push(waypoints);
         newWaypoints = oldWaypoints;
     }*/
+    /*let oldWaypoints:Array<any> = store.getState().maps.waypoints;
+    let newWaypoints:Array<any> = [];
+    oldWaypoints.forEach((val:any, i:number) => {
+        if(i !== index){
+            newWaypoints.push(val);
+        }
+    })
+
+    dispatch({
+        type: SET_WAYPOINTS,
+        payload: []
+    })
+
+    dispatch({
+        type: SET_WAYPOINTS,
+        payload: newWaypoints
+    })*/
 
     dispatch({
         type: DEL_WAYPOINTS,
@@ -130,3 +148,8 @@ export const setDirectionResult = (directionResults: google.maps.DirectionsResul
 
 
 //clear
+export const clearMapsEverything = () => (dispatch:any) => {
+    dispatch({
+        type: CLEAR_MAPS
+    })
+};

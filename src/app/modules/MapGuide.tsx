@@ -170,7 +170,7 @@ const MapGuide: FC<Props> = ({maps, setStartPoint, setEndPoint, setWaypoints, se
                   <OwnAutocomplete id={"endPoint"} name={"endPoint"} value={maps.endPoint} onChange={setEndPoint} />
                 </form>
             </Wrapper>
-            {form}
+            {/*form*/}
         </div>
     )
 };

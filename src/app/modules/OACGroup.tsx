@@ -56,7 +56,7 @@ const OACGroup: FC<Props> = ({waypoints, changeWaypoint}) => {
         {waypoints.map((wp:string,index:number) => {
           return (
             <>
-              <OwnAutocompleteWP id={"wp" + index} name={"wp" + index} index={index} value={waypoints[index].location} onChange={changeWpName} />
+              <OwnAutocompleteWP key={"wp"+index} id={"wp" + index} name={"wp" + index} index={index} value={waypoints[index].location} onChange={changeWpName} />
               <br/>
             </>
           )

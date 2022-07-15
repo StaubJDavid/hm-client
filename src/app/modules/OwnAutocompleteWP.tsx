@@ -93,9 +93,14 @@ const OwnAutocompleteWP: FC<Props> = ({id, name, value, onChange, index, waypoin
     onChange(address1, index);
   }
 
+    useEffect(() => {
+      console.log("Value changed: " + value)
+      setCompValue(value);
+    }, [value])
+
     return (
       <>
-        <div>
+        <div key={"wpoac"+id}>
           <label htmlFor={id}>{name}</label>
           <input
             ref={ref}

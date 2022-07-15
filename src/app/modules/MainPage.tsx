@@ -1,5 +1,6 @@
 import React, { FC, useState, useEffect} from 'react';
 import {connect} from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import CreateContainer from './Container/CreateContainer';
 import PageNavBar from '../common/Pagination/PageNavBar';
 import UpcomingContainers from './Container/UpcomingContainers';
@@ -24,6 +25,7 @@ type Props = {
 
 const MainPage: FC<Props> = ({auth}) => {
     const [tourContainers, setTourContainers] = useState(<></>);
+    const navigate = useNavigate();
 
     useEffect(() => {
         setTourContainers(<UpcomingContainers />);
@@ -31,7 +33,9 @@ const MainPage: FC<Props> = ({auth}) => {
 
     return (
         <div>
-            {auth.isAuthenticated?<CreateContainer />:<></>}
+            {/*auth.isAuthenticated?<CreateContainer />:<></>*/}
+            {auth.isAuthenticated?<button onClick={() => navigate(`/createcontainer`)}>Create Container</button>:<></>}
+            <br/>
             Authenticated: {String(auth.isAuthenticated)}
             {/*<MapTest />*/}
 

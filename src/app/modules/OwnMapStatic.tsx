@@ -38,10 +38,11 @@ const googleLibraries:Libraries = ["places"];
 
 interface Props extends google.maps.MapOptions{
     style: { [key: string]:string};
-    onClick?: (e: google.maps.MapMouseEvent) => void;
-    onIdle?: (map: google.maps.Map) => void;
-    children?: React.ReactNode;
-    maps:any;
+    startPoint:any;
+    endPoint:any;
+    waypoints:any;
+    onZoom:any;
+    /*maps:any;
     setMap:any;
     setDirectionService:any;
     setDirectionRenderer:any;
@@ -49,7 +50,7 @@ interface Props extends google.maps.MapOptions{
     setEndPoint:any;
     setWaypoints:any;
     setDirectionResult:any;
-    removeEmptyEntries:any;
+    removeEmptyEntries:any;*/
 };
 
 function useDeepCompareEffectForMaps(
@@ -59,71 +60,53 @@ function useDeepCompareEffectForMaps(
     React.useEffect(callback, dependencies.map(useDeepCompareMemoize));
   }
 
-const OwnMap: FC<Props> = ({onClick,onIdle,children,style,maps,setMap,
-    setDirectionService,
-    setDirectionRenderer,
-    setStartPoint,
-    setEndPoint,
-    setWaypoints,
-    setDirectionResult,
-    removeEmptyEntries,
+const OwnMap: FC<Props> = ({style,
+    onZoom,
+    startPoint,
+    endPoint,
+    waypoints,
     ...options}) => {
     const ref = useRef<HTMLDivElement>(null);
 
-    const {map, ownDirectionService,ownDirectionRenderer} = maps;
-
-    //const [map, setInMap] = useState<google.maps.Map>();
-
-    /*const [start, setStart] = useState("Herend, Hungary");
-    const [end, setEnd] = useState("Budapest, Hungary");*/
+    const [map, setMap] = useState<google.maps.Map>();
 
     //Directions Service
     const [ownDS, setOwnDS] = useState<google.maps.DirectionsService>(new google.maps.DirectionsService());
 
     //Directions Renderer
     const [ownDR, setOwnDR] = useState<google.maps.DirectionsRenderer>(new google.maps.DirectionsRenderer());
-    
-    //Directions Result
-    const [ownDResult, setOwnDResult] = useState<google.maps.DirectionsResult>();
-
-    //Directions Status
-    const [ownDStatus, setOwnDStatus] = useState<google.maps.DirectionsStatus>();
 
     function calcRoute(){
-        //ownDR.setMap(maps.map!);
-        let clearedWaypoints = removeEmptyEntries();
-        console.log(maps.waypoints);
+        ownDR.setMap(map!);
+
+        //console.log(maps.waypoints);
 
         let request;
-        if(clearedWaypoints.length === 0){
+        if(waypoints.length === 0){
             request = {
-                origin: maps.startPoint,
-                destination: maps.endPoint,
+                origin: startPoint,
+                destination: endPoint,
                 provideRouteAlternatives: true,
                 travelMode: 'DRIVING'
             } as google.maps.DirectionsRequest
 
         }else{
             request = {
-                origin: maps.startPoint,
-                waypoints: clearedWaypoints,
-                destination: maps.endPoint,
+                origin: startPoint,
+                waypoints: waypoints,
+                destination: endPoint,
                 provideRouteAlternatives: true,
                 travelMode: 'DRIVING'
             } as google.maps.DirectionsRequest
         }
-
-        console.log("called funct");
-        console.log(maps.startPoint);
-        console.log(maps.endPoint);
-
         
-
-        if(maps.startPoint !== "" && maps.endPoint !== ""){
-            ownDirectionService.route(request, (result:any, status:any) => {
+        console.log("called funct");
+        if(startPoint !== "" && endPoint !== ""){
+            ownDS.route(request, (result:any, status:any) => {
                 if(status === 'OK'){
-                    console.log(result);
-                    ownDirectionRenderer.setDirections(result);
+                    //console.log(result);
+                    console.log("Im in???")
+                    ownDR.setDirections(result);
                 }
             })
         }
@@ -132,35 +115,20 @@ const OwnMap: FC<Props> = ({onClick,onIdle,children,style,maps,setMap,
     useEffect(() => {
         if (ref.current && !map) {
             console.log("what");
-            //setInMap(new window.google.maps.Map(ref.current, {}));
 
             setMap(new window.google.maps.Map(ref.current, {}));
 
-            /*setOwnDS(new window.google.maps.DirectionsService());
-            setOwnDR(new window.google.maps.DirectionsRenderer());*/
-            setDirectionService(new window.google.maps.DirectionsService());
-            setDirectionRenderer(new window.google.maps.DirectionsRenderer());
-            setEndPoint("");
-            setStartPoint("");
-
-            setOwnDResult(undefined);
-            setOwnDStatus(undefined);
+            setOwnDS(new window.google.maps.DirectionsService());
+            setOwnDR(new window.google.maps.DirectionsRenderer());
           }
     },[ref, map]);
 
     useEffect(() =>{
         if(map){
-            ["click","idle"].forEach((eventName) => google.maps.event.clearListeners(map, eventName));
-
-            /*if(onClick){
-                map.addListener("click", onClick);
-            }*/
-
-            if(onIdle){
-                map.addListener("idle", () => onIdle(map));
-            }
+            calcRoute();
         }
-    }, [map, onClick, onIdle]);
+    }, [map]);
+
 
     useDeepCompareEffectForMaps(() => {
         if(map){
@@ -170,21 +138,14 @@ const OwnMap: FC<Props> = ({onClick,onIdle,children,style,maps,setMap,
 
     return (
         <>
-            <button onClick={(e:any) => {e.preventDefault();calcRoute();}}>Click</button>
             <div style={style} ref={ref} id="map"></div>
-            {React.Children.map(children, (child) => {
-                if(React.isValidElement(child)){
-                    return React.cloneElement(child, {map});
-                }
-            })}
         </>
     )
 };
 
 const mapStateToProps = (state:any)=>({
-    maps: state.maps
 });
 
-export default connect(mapStateToProps, {setMap,setDirectionService,setDirectionRenderer,setStartPoint,setEndPoint,setWaypoints,setDirectionResult,removeEmptyEntries})(OwnMap);
+export default connect(mapStateToProps, {})(OwnMap);
 
 //{height:"100vh", width:"100vw", margin:"0", padding:"0"}

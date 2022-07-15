@@ -22,6 +22,7 @@ import FilesUpload from './modules/FilesUpload';
 import Navbar from './modules/Layout/Navbar';
 import MapTest from './modules/MapTest';
 import MapGuide from './modules/MapGuide';
+import CreateContainer from './modules/Container/CreateContainer';
 
 if(localStorage.JWT){
   setAuthToken(localStorage.JWT);
@@ -70,6 +71,7 @@ class App extends Component  {
             } />
 
             <Route path="/container/:c_id" element={<ContainerPage />} />
+            <Route path="/createcontainer" element={<CreateContainer />} />
             <Route path="/maptest" element={<MapGuide />} />
             {/*<Route path="/container/:c_id" element={
               <RequireAuth redirectTo="/login" >

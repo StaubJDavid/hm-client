@@ -6,7 +6,8 @@ import { SET_DIRECTION_SERVICE,
     SET_WAYPOINTS,
     SET_MAP,
     DEL_WAYPOINTS,
-    SET_DIRECTION_RESULTS
+    SET_DIRECTION_RESULTS,
+    CLEAR_MAPS
 } from "../actions/types";
 import isEmpty from "../helpers/isEmpty";
 
@@ -60,6 +61,17 @@ export default function(state = initialState, action:any){
         case DEL_WAYPOINTS: return {
             ...state,
             waypoints: [...state.waypoints.slice(0, action.payload), ...state.waypoints.slice(action.payload + 1)]
+        }
+
+        case CLEAR_MAPS: return {
+            ...state,
+            map: null,
+            ownDirectionService: null,
+            ownDirectionRenderer: null,
+            endPoint: "",
+            startPoint: "",
+            waypoints: [],
+            directionResults: null
         }
 
         default: return state;

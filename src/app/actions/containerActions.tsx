@@ -70,10 +70,13 @@ export const getContainer = (container_id:any) => (dispatch:any) => {
             payload: res.data
         })
     }).catch(
-        err => dispatch({
-            type: GET_ERRORS,
-            payload: err.response.data
-        })
+        err => {
+            //console.log(err.response);
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
+        }
     )
 };
 
@@ -100,6 +103,9 @@ export const createContainer = (container:any) => async (dispatch:any) => {
             message:container.message,
             time_start:inputTimeFormat(container.time_start),
             time_end:inputTimeFormat(container.time_end),
+            trip_start:container.trip_start,
+            trip_end:container.trip_end,
+            waypoints:container.waypoints
         })
         /*dispatch({
             type: CREATE_CONTAINER,

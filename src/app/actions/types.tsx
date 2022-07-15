@@ -35,3 +35,4 @@ export const SET_WAYPOINTS = 'SET_WAYPOINTS';
 export const SET_MAP = 'SET_MAP';
 export const SET_DIRECTION_RESULTS = 'SET_DIRECTION_RESULTS';
 export const DEL_WAYPOINTS = 'DEL_WAYPOINTS';
+export const CLEAR_MAPS = 'CLEAR_MAPS';
