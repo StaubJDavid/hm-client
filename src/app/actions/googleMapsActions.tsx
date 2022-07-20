@@ -89,33 +89,6 @@ export const changeWaypoint = (waypoints: string, index:number) => (dispatch:any
 };
 
 export const delWaypoint = (index:number) => (dispatch:any) => {
-    /*console.log(index);
-    let oldWaypoints:Array<any> = store.getState().maps.waypoints;
-    let newWaypoints = oldWaypoints;
-    newWaypoints.splice(index,1);*/
-
-    /*if(oldWaypoints.length === 0){
-        oldWaypoints.push(waypoints);
-        newWaypoints = oldWaypoints;
-    }*/
-    /*let oldWaypoints:Array<any> = store.getState().maps.waypoints;
-    let newWaypoints:Array<any> = [];
-    oldWaypoints.forEach((val:any, i:number) => {
-        if(i !== index){
-            newWaypoints.push(val);
-        }
-    })
-
-    dispatch({
-        type: SET_WAYPOINTS,
-        payload: []
-    })
-
-    dispatch({
-        type: SET_WAYPOINTS,
-        payload: newWaypoints
-    })*/
-
     dispatch({
         type: DEL_WAYPOINTS,
         payload: index

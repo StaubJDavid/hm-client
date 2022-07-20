@@ -36,12 +36,12 @@ const ContainerPage: FC<Props> = ({errors,currentContainer,getContainer,clearMap
 
     useEffect(() => {
         console.log("xd2");
-        //clearMapsEverything();
+        clearMapsEverything();
         getContainer(c_id);
     },[c_id])
 
     useEffect(() => {
-        console.log(errors);
+        //console.log(errors);
         if(errors){
             if(errors.log === "No such container"){
                 navigate(`/`);
@@ -54,6 +54,7 @@ const ContainerPage: FC<Props> = ({errors,currentContainer,getContainer,clearMap
     if(!isEmpty(currentContainer)){
         console.log(currentContainer);
         content = <>
+            <div>Static Map</div>
             <div>Container id: {currentContainer.container_id}</div>
             <div>creator_id: {currentContainer.creator_id}</div>
             <div>role: {currentContainer.role}</div>

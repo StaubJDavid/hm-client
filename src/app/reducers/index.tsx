@@ -4,11 +4,13 @@ import containerReducer from './containerReducer';
 import errorReducer from './errorReducer';
 import uploadReducer from './uploadReducer';
 import googleMapsReducer from './googleMapsReducer';
+import adminReducer from './adminReducer';
 
 export default combineReducers({
     auth: authReducer,
     errors: errorReducer,
     upload: uploadReducer,
     container: containerReducer,
-    maps: googleMapsReducer
+    maps: googleMapsReducer,
+    admin: adminReducer,
 });

@@ -1,6 +1,7 @@
 import React, { FC, useState, useEffect, useRef} from 'react';
 import {connect} from 'react-redux';
 import {setMap, setDirectionService, setDirectionRenderer, setStartPoint, setEndPoint, setWaypoints, setDirectionResult, removeEmptyEntries} from '../actions/googleMapsActions';
+import {clearContainer} from '../actions/containerActions';
 import {useDeepCompareMemoize} from 'use-deep-compare-effect';
 
 const containerStyle = {
@@ -42,6 +43,9 @@ interface Props extends google.maps.MapOptions{
     endPoint:any;
     waypoints:any;
     onZoom:any;
+    setDirectionService:any;
+    setDirectionRenderer:any;
+    clearContainer:any;
     /*maps:any;
     setMap:any;
     setDirectionService:any;
@@ -65,6 +69,9 @@ const OwnMap: FC<Props> = ({style,
     startPoint,
     endPoint,
     waypoints,
+    setDirectionRenderer,
+    setDirectionService,
+    clearContainer,
     ...options}) => {
     const ref = useRef<HTMLDivElement>(null);
 
@@ -80,6 +87,9 @@ const OwnMap: FC<Props> = ({style,
         ownDR.setMap(map!);
 
         //console.log(maps.waypoints);
+
+        console.log(startPoint);
+        console.log(endPoint);
 
         let request;
         if(waypoints.length === 0){
@@ -106,6 +116,7 @@ const OwnMap: FC<Props> = ({style,
                 if(status === 'OK'){
                     //console.log(result);
                     console.log("Im in???")
+                    console.log(result);
                     ownDR.setDirections(result);
                 }
             })
@@ -115,6 +126,9 @@ const OwnMap: FC<Props> = ({style,
     useEffect(() => {
         if (ref.current && !map) {
             console.log("what");
+
+            setDirectionService(new window.google.maps.DirectionsService());
+            setDirectionRenderer(new window.google.maps.DirectionsRenderer());
 
             setMap(new window.google.maps.Map(ref.current, {}));
 
@@ -128,6 +142,14 @@ const OwnMap: FC<Props> = ({style,
             calcRoute();
         }
     }, [map]);
+
+    useEffect(() => {
+
+        return () => {
+            clearContainer();
+            console.log("OwnMapStatic Kill");
+        }
+    },[]);
 
 
     useDeepCompareEffectForMaps(() => {
@@ -146,6 +168,6 @@ const OwnMap: FC<Props> = ({style,
 const mapStateToProps = (state:any)=>({
 });
 
-export default connect(mapStateToProps, {})(OwnMap);
+export default connect(mapStateToProps, {setDirectionRenderer, setDirectionService, clearContainer})(OwnMap);
 
 //{height:"100vh", width:"100vw", margin:"0", padding:"0"}
