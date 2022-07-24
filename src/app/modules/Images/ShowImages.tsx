@@ -18,7 +18,7 @@ class ShowImages extends Component<Props,State> {
                 {this.props.container.currentContainer.images.map((i:any) => {
                     return <>
                         <img key={i.image_id} src={`http://localhost:3001/${i.container_id}/${i.file_name}`} width='100' height='100' alt='waa'/>
-                        <button>Delete</button>
+                        <button>Delete Picture</button>
                     </>
                 })}
             </div>
