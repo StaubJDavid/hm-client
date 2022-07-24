@@ -9,6 +9,7 @@ import isEmpty from '../../helpers/isEmpty';
 
 import {SET_INPROGRESS_CONTAINERS} from '../../actions/types';
 import calculateMaxPage from '../../helpers/calculateMaxPage';
+import ContainerReactions from './ContainerReactions';
 
 type Props = {
     inProgressContainers:any,
@@ -45,8 +46,13 @@ const InProgressContainers: FC<Props> = ({inProgressContainers,getInProgressCont
         }else{
             return (
                 <>
-                    {!isEmpty(inProgressContainers)?inProgressContainers.data.map((c:any) => {
-                        return <Container container={c} />
+                    {!isEmpty(inProgressContainers)?inProgressContainers.data.map((c:any, index:any) => {
+                        return (
+                            <>
+                                <Container container={c} />
+                                <ContainerReactions container={c} index={index} disabled={true} />
+                            </>
+                        )
                     }):<></>}
                     <PageNavBar passedFc={handleSearch} currentPage={currentPage} maxPage={calculateMaxPage(inProgressContainers.total,inProgressContainers.limit)} />
                 </>

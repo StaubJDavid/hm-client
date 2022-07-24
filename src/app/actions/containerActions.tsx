@@ -7,10 +7,14 @@ import {GET_ERRORS,
     CREATE_CONTAINER,
     DELETE_CONTAINER,
     CLEAR_CONTAINER,
-    CLEAR_CONTAINERS
+    CLEAR_CONTAINERS,
+    DELETE_REACTION,
+    INSERT_REACTION,
+    UPDATE_REACTION,
     } from './types';
 
 import inputTimeFormat from '../helpers/inputTimeFormat';
+import store from '../store';
 
 export const getUpcomingContainers = (offset:number, currentPage:number, limit:number) => (dispatch:any) => {
     axios.get(`/api/container/upcoming`,{params:{limit:limit, offset:offset}})
@@ -122,23 +126,72 @@ export const createContainer = (container:any) => async (dispatch:any) => {
     }
     
     
+};
 
-    //console.log(result);
-    /*.then (res => {
-        dispatch({
-            type: CREATE_CONTAINER,
-            payload: res.data
-        });
-        return true;
-    }).catch(
-        err => {
+export const postReaction = (container_id:any, reaction:any, reaction_id:any, index:any) => (dispatch:any) => {
+    axios.post(`/api/container/reaction/${container_id}`, {reaction: reaction, reaction_id: reaction_id})
+    .then (res => {
+        const oldContainer = store.getState().container.upcomingContainers.data;
+        const userId = store.getState().auth.user.id;
+        let newContainer = JSON.parse(JSON.stringify(oldContainer));
+        //console.log(newContainer);
+        //console.log(res.data);
+        if(res.data.route === "delete"){
+            //console.log("Delete Route");
+            newContainer[index].own_reaction = "none";
+            newContainer[index].reaction_id = null;
+            newContainer[index].reactions[reaction]--;
+
+            const reactedUserIndex = newContainer[index].reacted_users.findIndex((o:any) => {
+                return o.user_id === userId;
+            })
+
+            newContainer[index].reacted_users.splice(reactedUserIndex,1);
+
             dispatch({
-                type: GET_ERRORS,
-                payload: err.response.data
-            });
-            return false;
+                type: DELETE_REACTION,
+                payload: newContainer
+            })
+
+        }else if(res.data.route === "update"){
+            //console.log("Update Route");
+            newContainer[index].reactions[newContainer[index].own_reaction]--;
+            newContainer[index].reactions[reaction]++;
+            newContainer[index].own_reaction = reaction;
+            newContainer[index].reaction_id = reaction_id;
+
+            const reactedUserIndex = newContainer[index].reacted_users.findIndex((o:any) => {
+                return o.user_id === userId;
+            })
+            console.log(reactedUserIndex);
+            newContainer[index].reacted_users[reactedUserIndex].reaction = reaction;
+
+            dispatch({
+                type: UPDATE_REACTION,
+                payload: newContainer
+            })
+
+        }else if(res.data.route === "insert"){
+            //console.log(res.data);
+            const {reacted_users, success} = res.data;
+            //console.log("Insert Route");
+            newContainer[index].own_reaction = success[0].reaction;
+            newContainer[index].reaction_id = success[0].tr_id;
+            newContainer[index].reactions[success[0].reaction]++;
+
+            newContainer[index].reacted_users.push(reacted_users[0]);
+
+            dispatch({
+                type: INSERT_REACTION,
+                payload: newContainer
+            })
         }
-    )*/
+    }).catch(
+        err => dispatch({
+            type: GET_ERRORS,
+            payload: err.response.data
+        })
+    )
 };
 
 export const clearContainer = () => (dispatch:any) => {

@@ -8,6 +8,7 @@ import ShowImages from '../Images/ShowImages';
 import {useParams, useNavigate} from 'react-router-dom';
 import isEmpty from '../../helpers/isEmpty';
 import OwnMapStatic from '../OwnMapStatic';
+import Comments from './Comments/Comments';
 
 type Props = {
     errors:any;
@@ -64,6 +65,7 @@ const ContainerPage: FC<Props> = ({errors,currentContainer,getContainer,clearMap
             <div>time_start: {currentContainer.time_start}</div>
             <div>time_end: {currentContainer.time_end}</div>
             <div>name: {currentContainer.name}</div>
+            {/*
             <Wrapper apiKey={apiKey} libraries={["places"]}>
                 <OwnMapStatic
                     style={{height:"100vh", width:"100vw", margin:"0", padding:"0"}}
@@ -74,10 +76,11 @@ const ContainerPage: FC<Props> = ({errors,currentContainer,getContainer,clearMap
                     endPoint={currentContainer.end_point}
                     waypoints={currentContainer.waypoints}
                 />
-            </Wrapper>
+    </Wrapper>*/}
             <AddImagesButton container_id={currentContainer.container_id} />
             <hr/>
             <ShowImages />
+            <Comments container_id={currentContainer.container_id} />
         </>
     }
     

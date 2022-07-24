@@ -14,7 +14,6 @@ const PageNavBar: FC<Props> = ({passedFc, currentPage, maxPage}) => {
 
   function renderNavbar(){
     let navPageBar: any = <ul className="pagination justify-content-center"><li className="page-item"><a className="page-link">Error</a></li></ul>;
-    console.log(maxPage);
     if(maxPage <= 5){
       navPageBar = <FivePage passedFc={passedFc} currentPage={currentPage} maxPage={maxPage} />;
     }else if(currentPage < 4){
@@ -32,8 +31,6 @@ const PageNavBar: FC<Props> = ({passedFc, currentPage, maxPage}) => {
     <div>
       <nav aria-label="Page navigation example">
         {renderNavbar()}
-        {console.log(currentPage)}
-        {console.log(maxPage)}
       </nav>
     </div>
   )

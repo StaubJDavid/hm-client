@@ -9,6 +9,7 @@ import isEmpty from '../../helpers/isEmpty';
 
 import {SET_PAST_CONTAINERS} from '../../actions/types';
 import calculateMaxPage from '../../helpers/calculateMaxPage';
+import ContainerReactions from './ContainerReactions';
 
 type Props = {
     pastContainers:any,
@@ -45,8 +46,13 @@ const PastContainers: FC<Props> = ({pastContainers,getPastContainers}) => {
         }else{
             return (
                 <>
-                    {!isEmpty(pastContainers)?pastContainers.data.map((c:any) => {
-                        return <Container container={c} />
+                    {!isEmpty(pastContainers)?pastContainers.data.map((c:any, index:any) => {
+                        return (
+                            <>
+                                <Container container={c} />
+                                <ContainerReactions container={c} index={index} disabled={true} />
+                            </>
+                        )
                     }):<></>}
                     <PageNavBar passedFc={handleSearch} currentPage={currentPage} maxPage={calculateMaxPage(pastContainers.total,pastContainers.limit)} />
                 </>

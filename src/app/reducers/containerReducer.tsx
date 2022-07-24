@@ -6,11 +6,21 @@ import { SET_UPCOMING_CONTAINERS,
     CREATE_CONTAINER,
     DELETE_CONTAINER,
     CLEAR_CONTAINER,
-    CLEAR_CONTAINERS
+    CLEAR_CONTAINERS,
+    DELETE_REACTION,
+    INSERT_REACTION,
+    UPDATE_REACTION,
 } from "../actions/types";
 import isEmpty from "../helpers/isEmpty";
 
-const initialState = {
+interface ContainerState {
+    currentContainer:any,
+    upcomingContainers:any,
+    pastContainers:any,
+    inProgressContainers:any
+  }
+
+const initialState:ContainerState = {
     currentContainer: {},
     upcomingContainers: {},
     pastContainers: {},
@@ -54,6 +64,30 @@ export default function(state = initialState, action:any){
         case CLEAR_CONTAINERS: return {
             ...state,
             containers:{}
+        }
+
+        case DELETE_REACTION: return {
+            ...state,
+            upcomingContainers:{
+                ...state.upcomingContainers,
+                data: action.payload
+            }
+        }
+
+        case INSERT_REACTION: return {
+            ...state,
+            upcomingContainers:{
+                ...state.upcomingContainers,
+                data: action.payload
+            }
+        }
+
+        case UPDATE_REACTION: return {
+            ...state,
+            upcomingContainers:{
+                ...state.upcomingContainers,
+                data: action.payload
+            }
         }
 
         default: return state;

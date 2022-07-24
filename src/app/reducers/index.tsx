@@ -5,6 +5,7 @@ import errorReducer from './errorReducer';
 import uploadReducer from './uploadReducer';
 import googleMapsReducer from './googleMapsReducer';
 import adminReducer from './adminReducer';
+import commentReducer from './commentReducer';
 
 export default combineReducers({
     auth: authReducer,
@@ -13,4 +14,5 @@ export default combineReducers({
     container: containerReducer,
     maps: googleMapsReducer,
     admin: adminReducer,
+    comments: commentReducer,
 });
