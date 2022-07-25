@@ -45,17 +45,20 @@ const PastContainers: FC<Props> = ({pastContainers,getPastContainers}) => {
             return <div>No result</div>
         }else{
             return (
-                <>
-                    {!isEmpty(pastContainers)?pastContainers.data.map((c:any, index:any) => {
-                        return (
-                            <>
-                                <Container container={c} />
-                                <ContainerReactions container={c} index={index} disabled={true} />
-                            </>
-                        )
-                    }):<></>}
-                    <PageNavBar passedFc={handleSearch} currentPage={currentPage} maxPage={calculateMaxPage(pastContainers.total,pastContainers.limit)} />
-                </>
+                <div className="d-flex flex-column h-100">
+                    <div className='align-self-stretch p-2 overflow-auto'>
+                        {!isEmpty(pastContainers)?pastContainers.data.map((c:any, index:any) => {
+                            return (
+                                <>
+                                    <Container container={c}  index={index} disabled={true} />
+                                </>
+                            )
+                        }):<></>}
+                    </div>
+                    <div className='mt-auto p-2'>
+                        <PageNavBar passedFc={handleSearch} currentPage={currentPage} maxPage={calculateMaxPage(pastContainers.total,pastContainers.limit)} />
+                    </div>
+                </div>
             )
         }
     }

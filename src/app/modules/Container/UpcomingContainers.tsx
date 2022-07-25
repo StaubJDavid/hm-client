@@ -46,17 +46,20 @@ const UpcomingContainers: FC<Props> = ({upcomingContainers,getUpcomingContainers
             return <div>No result</div>
         }else{
             return (
-                <>
-                    {!isEmpty(upcomingContainers)?upcomingContainers.data.map((c:any, index:any) => {
-                        return (
-                            <>
-                                <Container container={c} />
-                                <ContainerReactions container={c} index={index} disabled={false} />
-                            </>
-                        )
-                    }):<></>}
-                    <PageNavBar passedFc={handleSearch} currentPage={currentPage} maxPage={calculateMaxPage(upcomingContainers.total,upcomingContainers.limit)} />
-                </>
+                <div className="d-flex flex-column h-100">
+                    <div className='align-self-stretch p-2 overflow-auto'>
+                        {!isEmpty(upcomingContainers)?upcomingContainers.data.map((c:any, index:any) => {
+                            return (
+                                <div>
+                                    <Container container={c} index={index} disabled={false} />                                    
+                                </div>
+                            )
+                        }):<></>}
+                    </div>
+                    <div className='mt-auto p-2'>
+                        <PageNavBar passedFc={handleSearch} currentPage={currentPage} maxPage={calculateMaxPage(upcomingContainers.total,upcomingContainers.limit)} />
+                    </div>
+                </div>
             )
         }
     }

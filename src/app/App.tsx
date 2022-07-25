@@ -42,45 +42,54 @@ class App extends Component  {
     return (
       <Provider store={store}>
         <Router>
-          <Navbar />
-          <Routes>
-            <Route path="/" element={<MainPage />} />
-            {/*<Route path="/container/:c_id" element={<WrappedContainer />} />*/}
-            {/*element={withRouter(<Container />)} */}
-            <Route path="/login" element={
-              <RedirectIfAuth redirectTo="/" >
-                <Login />
-              </RedirectIfAuth>
-            } />
-            <Route path="/register" element={
-              <RedirectIfAuth redirectTo="/" >
-                <Register />
-              </RedirectIfAuth>
-            } />
+          <div className='container-fluid px-0 py-0 min-vh-100' >
+            <div className="row g-0">
+              <div className="col px-0">
+                <Navbar />
+              </div>
+            </div>
+            <div className="row g-0">
+              <div className="col px-0" >
+                <div className={"bg-primary"} >
+                  <Routes>
+                    <Route path="/" element={<MainPage />} />
 
-            <Route path="/images" element={<FilesUpload />} />
-            <Route path="/protected" element={
-              <RequireAuth redirectTo="/login" >
-                <ProtectThisRoute />
-              </RequireAuth>
-            } />
+                    <Route path="/login" element={
+                      <RedirectIfAuth redirectTo="/" >
+                        <Login />
+                      </RedirectIfAuth>
+                    } />
 
-            <Route path="/image" element={
-              <RequireAuth redirectTo="/login" >
-                <FileUpload />
-              </RequireAuth>
-            } />
+                    <Route path="/register" element={
+                      <RedirectIfAuth redirectTo="/" >
+                        <Register />
+                      </RedirectIfAuth>
+                    } />
 
-            <Route path="/container/:c_id" element={<ContainerPage />} />
-            <Route path="/createcontainer" element={<CreateContainer />} />
-            <Route path="/maptest" element={<MapGuide />} />
-            <Route path="/approve" element={<ApprovePage />} />
-            {/*<Route path="/container/:c_id" element={
-              <RequireAuth redirectTo="/login" >
-                <ContainerPage />
-              </RequireAuth>
-            } />*/}
-          </Routes>
+                    
+                    <Route path="/protected" element={
+                      <RequireAuth redirectTo="/login" >
+                        <ProtectThisRoute />
+                      </RequireAuth>
+                    } />
+
+                    {/*
+                    <Route path="/images" element={<FilesUpload />} />
+                    <Route path="/maptest" element={<MapGuide />} />
+                    <Route path="/image" element={
+                      <RequireAuth redirectTo="/login" >
+                        <FileUpload />
+                      </RequireAuth>
+                    } />*/}
+
+                    <Route path="/container/:c_id" element={<ContainerPage />} />
+                    <Route path="/createcontainer" element={<CreateContainer />} />
+                    <Route path="/approve" element={<ApprovePage />} />
+                  </Routes>
+                </div>
+              </div>
+            </div>
+          </div>
         </Router>
       </Provider>
     );

@@ -45,17 +45,21 @@ const InProgressContainers: FC<Props> = ({inProgressContainers,getInProgressCont
             return <div>No result</div>
         }else{
             return (
-                <>
-                    {!isEmpty(inProgressContainers)?inProgressContainers.data.map((c:any, index:any) => {
-                        return (
-                            <>
-                                <Container container={c} />
-                                <ContainerReactions container={c} index={index} disabled={true} />
-                            </>
-                        )
-                    }):<></>}
-                    <PageNavBar passedFc={handleSearch} currentPage={currentPage} maxPage={calculateMaxPage(inProgressContainers.total,inProgressContainers.limit)} />
-                </>
+                <div className="d-flex flex-column h-100">
+                    <div className='align-self-stretch p-2 overflow-auto'>
+                        {!isEmpty(inProgressContainers)?inProgressContainers.data.map((c:any, index:any) => {
+                            return (
+                                <>
+                                    <Container container={c} index={index} disabled={true}  />
+                                    
+                                </>
+                            )
+                        }):<></>}
+                    </div>
+                    <div className='mt-auto p-2'>
+                        <PageNavBar passedFc={handleSearch} currentPage={currentPage} maxPage={calculateMaxPage(inProgressContainers.total,inProgressContainers.limit)} />
+                    </div>
+                </div>
             )
         }
     }
