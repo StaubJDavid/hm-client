@@ -5,7 +5,9 @@ import {getContainer} from '../../actions/containerActions';
 import AddImagesButton from '../Images/AddImagesButton';
 import ShowImages from '../Images/ShowImages';
 import timeFormat from '../../helpers/timeFormat';
+import trimString from '../../helpers/trimString';
 import ContainerReactions from './ContainerReactions';
+import TextArea from '../../common/TextArea';
 var classNames = require('classnames');
 type Props = {
     container:any;
@@ -23,12 +25,14 @@ const Container: FC<Props> = ({container, index, disabled}) => {
     }
     return (
         <div
-            className={classNames("card", {"bg-light": onHover, "bg-white":!onHover})}
-            onMouseEnter={() => setOnHover(true)}
-            onMouseLeave={() => setOnHover(false)}
-            onClick={() => handleClick()}
+            className={classNames("card mb-4", {"bg-light pointer-cursor": onHover, "bg-white":!onHover})}
         >
-            <div className="card-header">
+            <div
+                onMouseEnter={() => setOnHover(true)}
+                onMouseLeave={() => setOnHover(false)}
+                onClick={() => handleClick()}
+            >
+            <div className="card-header fw-bold fs-5">
                 {title}
             </div>
             <div className={"card-body"} >
@@ -39,7 +43,15 @@ const Container: FC<Props> = ({container, index, disabled}) => {
                             <div>Mikor kezdődik: {timeFormat(time_start)}</div>
                             <div>Tervezett végpont: {timeFormat(time_end)}</div>
                             <div>Kiírva: {timeFormat(created)}</div>
-                            <div>{message}</div>
+                            <TextArea
+                                name="message" 
+                                maxlength={16384}
+                                value={message}
+                                error={false} 
+                                onChange={() => {}}  
+                                placeholder="Terv, tudnivalók stb..."
+                                classNamesInherited={"mb-4 text-area-no-resize pointer-cursor"}
+                            />
                         </div>
                         <div className="col">
                             Column
@@ -47,8 +59,9 @@ const Container: FC<Props> = ({container, index, disabled}) => {
                     </div>
                 </div>
             </div>
+            </div>
             <div className="card-footer">
-                <ContainerReactions container={container} index={index} disabled={disabled} />
+                <ContainerReactions container={container} index={index} disabled={disabled}/>
             </div>
 
         </div>

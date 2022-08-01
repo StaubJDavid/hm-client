@@ -25,20 +25,9 @@ class Login extends Component<Props,State> {
             password: '',
             errors: {}
         }
-        
-        //Remove
-        this.onLoginClick = this.onLoginClick.bind(this);
 
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
-    }
-
-    //Remove
-    onLoginClick(e:any){
-        this.props.loginUser({
-            email:"davidkah20@gmail.com",
-            password:"staubkah20"
-        });
     }
 
     componentWillReceiveProps(nextProps:any){
@@ -65,33 +54,36 @@ class Login extends Component<Props,State> {
     render() {
         const {errors} = this.state; 
         return (
-            <div className="login">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-md-8 m-auto">
-                            <h1 className="display-4 text-center">Log In</h1>
-                            <p className="lead text-center">Sign in to your DevConnector account</p>
-                            <form onSubmit={this.onSubmit}>
-                                <TextInput
-                                    name="email" 
-                                    value={this.state.email}
-                                    error={errors.email} 
-                                    type="email"
-                                    onChange={this.onChange}  
-                                    placeholder="Email Address"
-                                />
-                                <TextInput 
-                                    type="password"
-                                    name="password"
-                                    value={this.state.password} 
-                                    onChange={this.onChange}
-                                    error={errors.password}
-                                    placeholder="Password"
-                                />
-                                <input type="submit" className="btn btn-info btn-block mt-4" />
-                            </form>
-                        </div>
+            <div className='container bg-white middle'>
+                <div className="d-flex flex-column align-items-center justify-content-center auto-center" >
+                    <div>
+                        <h1 className="display-4 text-center fw-bold mb-5">Bejelentkezés</h1>
                     </div>
+                    <form className='fmw-50' onSubmit={this.onSubmit}>
+                        <h2 className="fw-bold mb-2">E-mail cím</h2>
+                        <TextInput
+                            name="email" 
+                            value={this.state.email}
+                            error={errors.email} 
+                            type="email"
+                            onChange={this.onChange}  
+                            placeholder="E-mail cím"
+                            classNamesInherited={"mb-5"}
+                        />
+                        <h2 className="fw-bold mb-2">Jelszó</h2>
+                        <TextInput 
+                            type="password"
+                            name="password"
+                            value={this.state.password} 
+                            onChange={this.onChange}
+                            error={errors.password}
+                            placeholder="Jelszó"
+                            classNamesInherited={"mb-4"}
+                        />
+                        <div className='text-center'>
+                            <input type="submit" value={"Bejelentkezés"} className="btn btn-info btn-block mt-4 fw-bolder fs-3" />
+                        </div>
+                    </form>
                 </div>
                 {this.props.auth.isAuthenticated?<Navigate to={"/"} />:<></>}
             </div>

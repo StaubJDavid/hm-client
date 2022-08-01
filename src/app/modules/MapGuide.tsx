@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect} from 'react';
+import React, { FC, useState, useEffect, useRef} from 'react';
 import {connect} from 'react-redux';
 import isEmpty from '../helpers/isEmpty';
 import { Wrapper } from "@googlemaps/react-wrapper";
@@ -63,6 +63,7 @@ const MapGuide: FC<Props> = ({maps, setStartPoint, setEndPoint, setWaypoints, se
       lat: 47.491853377245285,
       lng: 19.042819149443883,
     });
+
 
     const onClick = (e: google.maps.MapMouseEvent) => {
         // avoid directly mutating state
@@ -155,20 +156,35 @@ const MapGuide: FC<Props> = ({maps, setStartPoint, setEndPoint, setWaypoints, se
         </div>
       );
 
+    /*const handleCalcClick = () => {
+      calculateRoute.current();
+    }*/
+    const [calculateRoute, doCalculateRoute] = useState(0);
+
     return (
         <div style={{ display: "flex", height: "100%" }}>
             <Wrapper apiKey={apiKey} libraries={["places"]}>
-                <OwnMap style={{height:"100vh", width:"100vw", margin:"0", padding:"0"}} center={center} zoom={zoom} onClick={onClick}>
+                <OwnMap
+                  style={{height:"100vh", width:"100vw", margin:"0", padding:"0"}}
+                  center={center}
+                  zoom={zoom}
+                  onClick={onClick}
+                  calculateRouteInMap={calculateRoute}
+                >
                   {clicks.map((latLng, i) => (
                       <OwnMarker key={i} position={latLng} />
                   ))}
-                </OwnMap>
-                <form>
-                  <OwnAutocomplete id={"startPoint"} name={"startPoint"} value={maps.startPoint} onChange={setStartPoint} />
+                  </OwnMap>
+                <div className='ms-3'>
+                  <OwnAutocomplete id={"startPoint"} name={"Kezdőpont"} value={maps.startPoint} onChange={setStartPoint} />
                   <br/>
                   <OACGroup />
-                  <OwnAutocomplete id={"endPoint"} name={"endPoint"} value={maps.endPoint} onChange={setEndPoint} />
-                </form>
+                  <OwnAutocomplete id={"endPoint"} name={"Végpont"} value={maps.endPoint} onChange={setEndPoint} />
+                  
+                    <div className='text-center mt-2'>
+                      <button className='btn btn-primary shadow' onClick={(e:any) => {e.preventDefault();doCalculateRoute(prev => prev + 1);}}>Calculate Route</button> 
+                    </div>
+                  </div>
             </Wrapper>
             {/*form*/}
         </div>

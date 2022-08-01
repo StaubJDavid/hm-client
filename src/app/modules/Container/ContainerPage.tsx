@@ -65,7 +65,7 @@ const ContainerPage: FC<Props> = ({errors,currentContainer,getContainer,clearMap
             <div>time_start: {currentContainer.time_start}</div>
             <div>time_end: {currentContainer.time_end}</div>
             <div>name: {currentContainer.name}</div>
-            {/*
+            {/*remove comment for google maps
             <Wrapper apiKey={apiKey} libraries={["places"]}>
                 <OwnMapStatic
                     style={{height:"100vh", width:"100vw", margin:"0", padding:"0"}}

@@ -6,36 +6,6 @@ import OwnMap from './OwnMap';
 import OwnMarker from './OwnMarker';
 import {setStartPoint, setEndPoint, setWaypoints, setDirectionResult, addWaypoints,delWaypoint} from '../actions/googleMapsActions';
 
-const containerStyle = {
-    width: '400px',
-    height: '400px'
-  };
-  
-
-
-//import {getContainers} from '../actions/containerActions';
-//import UpcomingContainers from './Container/UpcomingContainers';
-//import Containers from './Container/Containers';
-
-enum TravelMode {
-    /**
-     * Specifies a bicycling directions request.
-     */
-    BICYCLING = 'BICYCLING',
-    /**
-     * Specifies a driving directions request.
-     */
-    DRIVING = 'DRIVING',
-    /**
-     * Specifies a transit directions request.
-     */
-    TRANSIT = 'TRANSIT',
-    /**
-     * Specifies a walking directions request.
-     */
-    WALKING = 'WALKING',
-  }
-
 declare type Libraries = ("drawing" | "geometry" | "localContext" | "places" | "visualization")[];
 const googleLibraries:Libraries = ["places"];
 
@@ -110,10 +80,11 @@ const OwnAutocompleteWP: FC<Props> = ({id, name, value, onChange, index, waypoin
             value={compValue}
             onChange={(e) => setCompValue(e.target.value)}
           />
-          <button onClick={(e:any) => {e.preventDefault(); addWaypoints("",index+1)}}>Add</button>
-          <br/>
-          <button onClick={(e:any) => {e.preventDefault(); delWaypoint(index);}}>Delete</button>
-        </div>
+          <div className='text-center mt-2'>
+            <button className='btn btn-primary shadow me-3' onClick={(e:any) => {e.preventDefault(); addWaypoints("",index+1)}}>Hozzáadás</button>
+            <button className='btn btn-primary shadow'  onClick={(e:any) => {e.preventDefault(); delWaypoint(index);}}>Törlés</button>
+          </div>
+          </div>
       </>
     )
 };

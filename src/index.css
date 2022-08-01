@@ -12,9 +12,38 @@ body {
 .box-my {
   display: flex;
   flex-flow: column;
-  height: 92%;
+  height: 91%;
 }
  
 .remaining {
   flex-grow : 1;
+}
+
+.middle {
+  max-height: calc(100vh - 56px);
+}
+
+.auto-center {
+  padding-top:15%;
+}
+
+.fmw-50 {
+  min-width: 50%;
+}
+
+.text-area-no-resize {
+  resize: none;
+}
+
+.of-auto {
+  overflow: auto;
+  overflow-x: hidden;
+}
+
+.of-visible {
+  overflow: visible;
+}
+
+.pointer-cursor {
+  cursor: pointer;
 }

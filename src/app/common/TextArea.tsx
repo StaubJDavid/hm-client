@@ -7,6 +7,7 @@ type Props = {
     value:any,       
     error:any,
     onChange:any,
+    classNamesInherited?:any;
     placeholder?:any,
     info?:any
 }
@@ -18,13 +19,14 @@ const TextArea: FC<Props> = ({
         error,
         onChange,
         placeholder,
-        info
+        info,
+        classNamesInherited
     }) => (
         <div className="form-group">
             <textarea 
             rows={5}
             maxLength={maxlength}
-            className={classnames("form-control form-control-lg",{"is-invalid":error})} 
+            className={classnames(`form-control form-control-lg ${classNamesInherited}`,{"is-invalid":error})} 
             placeholder={placeholder}
             value={value} 
             onChange={onChange}

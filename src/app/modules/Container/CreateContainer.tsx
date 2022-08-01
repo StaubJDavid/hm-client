@@ -27,8 +27,10 @@ const CreateContainer: FC<Props> = ({errors,maps,createContainer,clearContainer,
     const [message, setMessage] = useState("");
     const [time_start, setTimeStart] = useState("");
     const [time_end, setTimeEnd] = useState("");
-    const [options, setOptions] = useState([{name: 'Túra', value:'tour'},
-                                            {name: 'Album', value:'album'}]);
+    const [options, setOptions] = useState([{name: 'Túra', value:'tour'}]);
+                                            
+    /*const [options, setOptions] = useState([{name: 'Túra', value:'tour'},
+    {name: 'Album', value:'album'}]);*/
 
     useEffect(() => {
         clearMapsEverything();
@@ -49,10 +51,6 @@ const CreateContainer: FC<Props> = ({errors,maps,createContainer,clearContainer,
             waypoints: maps.waypoints
         }
 
-        /*
-        endPoint
-startPoint
-        */
         clearContainer();
         const createSuccess = await createContainer(container);
         //console.log(createSuccess);
@@ -64,54 +62,71 @@ startPoint
     }
 
     return (
-        <>
-            <div className="container">
-                <div className="row">
-                    <div className="m-auto">
-                        <p className="lead text-center">Create container</p>
-                        <form onSubmit={(e:any) => onSubmit(e)}>
-                            <TextInput
-                                name="title" 
-                                value={title}
-                                error={errors.title} 
-                                type="text"
-                                onChange={(e:any) => setTitle(e.target.value)}  
-                                placeholder="Title"
-                            />
-                            <br/>
-                            <TextArea
-                                name="message" 
-                                maxlength={2048}
-                                value={message}
-                                error={errors.message} 
-                                onChange={(e:any) => setMessage(e.target.value)}  
-                                placeholder="Plan"
-                            />
-                            <br/>
-                            <SelectList
-                                name="role" 
-                                value={role}
-                                error={errors.role} 
-                                onChange={(e:any) => setRole(e.target.value)}  
-                                options={options}
-                                placeholder="Container Type"
-                            />
-                            <br/>
-                            <p>Start Time:</p>
+        <div className='container bg-white middle of-auto px-5'>
+            <h1 className="display-4 text-center fw-bold mb-5">Túra tervezés</h1>
+            <form className="of-auto" onSubmit={(e:any) => onSubmit(e)}>
+
+                <h2 className="fw-bold mb-2">Túra címe</h2>
+                <TextInput
+                    name="title" 
+                    value={title}
+                    error={errors.title} 
+                    type="text"
+                    onChange={(e:any) => setTitle(e.target.value)}  
+                    placeholder="Túra címe"
+                    classNamesInherited={"mb-4"}
+                />
+
+                <h2 className="fw-bold mb-2">Túra leírása</h2>
+                <TextArea
+                    name="message" 
+                    maxlength={16384}
+                    value={message}
+                    error={errors.message} 
+                    onChange={(e:any) => setMessage(e.target.value)}  
+                    placeholder="Terv, tudnivalók stb..."
+                    classNamesInherited={"mb-4"}
+                />
+
+                <h2 className="fw-bold mb-2">Túra fajta</h2>
+                <SelectList
+                    name="role" 
+                    value={role}
+                    error={errors.role} 
+                    onChange={(e:any) => setRole(e.target.value)}  
+                    options={options}
+                    placeholder="Container Type"
+                />
+
+                {/* Időpont választás */}
+                <h2 className="fw-bold mb-2 mt-4">Túra Időpontok</h2>
+                <div className="container-fluid">
+                    <div className="row">
+                        <div className="col-md-6 text-center">
+                            Kezdő időpont
+                        </div>
+                        <div className="col-md-6 text-center">
+                            Tervezett végzési időpont
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-md-6 text-center">
                             <input onChange={(e:any) => setTimeStart(e.target.value)} type="datetime-local" name="time_start"></input>
-                            
-                            <p>End Time:</p>
+                        </div>
+                        <div className="col-md-6 text-center">
                             <input onChange={(e:any) => setTimeEnd(e.target.value)} type="datetime-local" name="time_end"></input>
-                            <br/>
-                            <br/>
-                            <br/>
-                            <MapGuide />
-                            <input type="submit" className="btn btn-info btn-block mt-4" />
-                        </form>
+                        </div>
                     </div>
                 </div>
-            </div>
-            </>
+
+                <h2 className="fw-bold mb-2 mt-4">Túra útvonal</h2>
+                <MapGuide />
+
+                <div className='text-center mb-4'>
+                    <input type="submit" value="Túra létrehozása" className="btn btn-info btn-block mt-4 fw-bolder fs-3" />
+                </div>
+            </form>
+        </div>
     )
 };
 
@@ -121,3 +136,52 @@ const mapStateToProps = (state:any)=>({
 });
 
 export default connect(mapStateToProps, {createContainer,clearContainer,clearMapsEverything})(CreateContainer);
+
+/*
+<div className="container">
+                        <div className="row of-auto">
+                            <div className="m-auto">
+                                <p className="lead text-center">Create container</p>
+                                <form className="of-auto" onSubmit={(e:any) => onSubmit(e)}>
+                                    <TextInput
+                                        name="title" 
+                                        value={title}
+                                        error={errors.title} 
+                                        type="text"
+                                        onChange={(e:any) => setTitle(e.target.value)}  
+                                        placeholder="Title"
+                                    />
+                                    <br/>
+                                    <TextArea
+                                        name="message" 
+                                        maxlength={2048}
+                                        value={message}
+                                        error={errors.message} 
+                                        onChange={(e:any) => setMessage(e.target.value)}  
+                                        placeholder="Plan"
+                                    />
+                                    <br/>
+                                    <SelectList
+                                        name="role" 
+                                        value={role}
+                                        error={errors.role} 
+                                        onChange={(e:any) => setRole(e.target.value)}  
+                                        options={options}
+                                        placeholder="Container Type"
+                                    />
+                                    <br/>
+                                    <p>Start Time:</p>
+                                    <input onChange={(e:any) => setTimeStart(e.target.value)} type="datetime-local" name="time_start"></input>
+                                    
+                                    <p>End Time:</p>
+                                    <input onChange={(e:any) => setTimeEnd(e.target.value)} type="datetime-local" name="time_end"></input>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    <MapGuide />
+                                    <input type="submit" className="btn btn-info btn-block mt-4" />
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+*/

@@ -27,10 +27,10 @@ class Navbar extends Component<Props,State> {
         const authLinks = (
             <>
                 {user.role==="admin"?<li className="nav-item">
-                    <Link to="/approve" className="nav-link">Approve</Link>
+                    <Link to="/approve" className="nav-link">Jóváhagyás</Link>
                 </li>:<></>}
                 <li className="nav-item">
-                    <Link to="/" onClick={this.onLogoutClick.bind(this)} className="nav-link">Logout</Link>
+                    <Link to="/" onClick={this.onLogoutClick.bind(this)} className="nav-link">Kijelentkezés</Link>
                 </li>
             </>
         );
@@ -38,10 +38,10 @@ class Navbar extends Component<Props,State> {
         const guestLinks = (
             <>
                 <li className="nav-item">
-                    <Link className="nav-link" to="/register">Sign Up</Link>
+                    <Link className="nav-link" to="/register">Regisztrálás</Link>
                 </li>
                 <li className="nav-item">
-                    <Link className="nav-link" to="/login">Login</Link>
+                    <Link className="nav-link" to="/login">Bejelentkezés</Link>
                 </li>
             </>
         );
@@ -57,7 +57,7 @@ class Navbar extends Component<Props,State> {
                     <div className="collapse navbar-collapse" id="mobileNav">
                         <ul className="navbar-nav mr-auto">
                             <li className="nav-item">
-                                <Link className="nav-link" to="/">Home</Link>
+                                <Link className="nav-link" to="/">Kezdőoldal</Link>
                             </li>
                         </ul>
                         <ul className="navbar-nav ms-auto">

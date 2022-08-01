@@ -10,6 +10,7 @@ import calculateMaxPage from '../../helpers/calculateMaxPage';
 
 import {SET_UPCOMING_CONTAINERS} from '../../actions/types';
 import ContainerReactions from './ContainerReactions';
+import NoTourResult from './NoTourResult';
 
 type Props = {
     upcomingContainers:any,
@@ -40,10 +41,10 @@ const UpcomingContainers: FC<Props> = ({upcomingContainers,getUpcomingContainers
     }
 
     if(isEmpty(upcomingContainers)){
-        return <div>Loading...</div>
+        return <div>Töltés...</div>
     }else{
         if(upcomingContainers.total === 0){
-            return <div>No result</div>
+            return <NoTourResult />
         }else{
             return (
                 <div className="d-flex flex-column h-100">

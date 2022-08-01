@@ -34,20 +34,9 @@ class Register extends Component<Props,State> {
             message: '',
             errors: {}
         }
-        
-        this.onRegisterClick = this.onRegisterClick.bind(this);
 
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
-    }
-
-    onRegisterClick(e:any){
-        this.props.registerUser({
-            email:"davidkah20@gmail.com",
-            password:"staubkah20",
-            password2:"staubkah20",
-            name:"Staub József Dávid"
-        });
     }
 
     componentWillReceiveProps(nextProps:any){
@@ -80,7 +69,7 @@ class Register extends Component<Props,State> {
     render() {
         const {errors} = this.state;
         return (
-            <div className="register">
+        /*<div className="register">
                 <div className="container">
                     <div className="row">
                         <div className="col-md-8 m-auto">
@@ -131,6 +120,69 @@ class Register extends Component<Props,State> {
                             </form>
                         </div>
                     </div>
+                </div>
+                </div>*/
+
+            <div className='container bg-white middle'>
+                <div className="d-flex flex-column align-items-center justify-content-center" >
+                    <div>
+                        <h1 className="display-4 text-center fw-bold mb-5">Regisztráció</h1>
+                    </div>
+                    <form className='fmw-50 mh-75' onSubmit={this.onSubmit}>
+                        <h2 className="fw-bold mb-2">Teljes név</h2>
+                        <TextInput
+                            name="nickname" 
+                            value={this.state.nickname}
+                            error={errors.nickname} 
+                            type="text"
+                            onChange={this.onChange}  
+                            placeholder="Kitalált Pista"
+                            classNamesInherited={"mb-2"}
+                        />
+                        <h2 className="fw-bold mb-2">E-mail cím</h2>
+                        <TextInput
+                            name="email" 
+                            value={this.state.email}
+                            error={errors.email} 
+                            type="email"
+                            onChange={this.onChange}  
+                            placeholder="valamicim@gmail.com"
+                            classNamesInherited={"mb-2"}
+                        />
+                        <h2 className="fw-bold mb-2">Bemutatkozás</h2>
+                        <TextArea
+                            name="message" 
+                            maxlength={255}
+                            value={this.state.message}
+                            error={errors.message} 
+                            onChange={this.onChange}  
+                            placeholder="Helló, én vagyok az tudod onnan abból a cuccosból én vagyok az"
+                            classNamesInherited={"text-area-no-resize mb-2"}
+                        />
+                        <h2 className="fw-bold mb-2">Jelszó</h2>
+                        <TextInput
+                            name="password" 
+                            value={this.state.password}
+                            error={errors.password} 
+                            type="password"
+                            onChange={this.onChange}  
+                            placeholder="Jelszó"
+                            classNamesInherited={"mb-2"}
+                        />
+                        <h2 className="fw-bold mb-2">Jelszó megismétlése</h2>
+                        <TextInput
+                            name="password2" 
+                            value={this.state.password2}
+                            error={errors.password2} 
+                            type="password"
+                            onChange={this.onChange}  
+                            placeholder="Jelszó ismétlés"
+                            classNamesInherited={"mb-2"}
+                        />
+                        <div className='text-center'>
+                            <input type="submit" value={"Regisztrálás"} className="btn btn-info btn-block mt-4 fw-bolder fs-3" />
+                        </div>
+                    </form>
                 </div>
                 {this.props.auth.isAuthenticated?<Navigate to="/" />:<></>}
                 {this.props.errors.register?<><Navigate to="/" />{this.props.scuffed()}</>:<></>}

@@ -2,15 +2,16 @@ import React, {FC} from 'react'
 import classnames from 'classnames'
 
 type Props = {
-    name:any,       
-    value:any,       
-    error:any,       
-    type:any,
-    onChange:any,
-    placeholder?:any,
-    label?:any,
-    disabled?:any,
-    info?:any
+    name:any;       
+    value:any;       
+    error:any;       
+    type:any;
+    onChange:any;
+    classNamesInherited?:any;
+    placeholder?:any;
+    label?:any;
+    disabled?:any;
+    info?:any;
 }
 
 const TextInput: FC<Props> = ({
@@ -22,12 +23,13 @@ const TextInput: FC<Props> = ({
         placeholder,
         label,
         disabled,
-        info
+        info,
+        classNamesInherited
     }) => (
         <div className="form-group">
             <input 
             type={type} 
-            className={classnames("form-control form-control-lg",{"is-invalid":error})} 
+            className={classnames(`form-control form-control-lg ${classNamesInherited}`,{"is-invalid":error})} 
             placeholder={placeholder}
             value={value} 
             onChange={onChange}

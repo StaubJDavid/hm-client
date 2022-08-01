@@ -31,10 +31,10 @@ const Comments: FC<Props> = ({auth,comments,getComments, container_id}) => {
     let commentsContent = <></>
 
     if(comments === null){
-        commentsContent = <div>Loading...</div>
+        commentsContent = <div>Töltés...</div>
     }else{
         if(isEmpty(comments)){
-            commentsContent = <div>No Comments</div>
+            commentsContent = <div>Nincs komment</div>
         }else{
             commentsContent = <>
                 {comments.map((c:any) => {

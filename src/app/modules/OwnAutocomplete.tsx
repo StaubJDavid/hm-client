@@ -6,36 +6,6 @@ import OwnMap from './OwnMap';
 import OwnMarker from './OwnMarker';
 import {setStartPoint, setEndPoint, setWaypoints, setDirectionResult, addWaypoints} from '../actions/googleMapsActions';
 
-const containerStyle = {
-    width: '400px',
-    height: '400px'
-  };
-  
-
-
-//import {getContainers} from '../actions/containerActions';
-//import UpcomingContainers from './Container/UpcomingContainers';
-//import Containers from './Container/Containers';
-
-enum TravelMode {
-    /**
-     * Specifies a bicycling directions request.
-     */
-    BICYCLING = 'BICYCLING',
-    /**
-     * Specifies a driving directions request.
-     */
-    DRIVING = 'DRIVING',
-    /**
-     * Specifies a transit directions request.
-     */
-    TRANSIT = 'TRANSIT',
-    /**
-     * Specifies a walking directions request.
-     */
-    WALKING = 'WALKING',
-  }
-
 declare type Libraries = ("drawing" | "geometry" | "localContext" | "places" | "visualization")[];
 const googleLibraries:Libraries = ["places"];
 
@@ -119,7 +89,11 @@ const OwnAutocomplete: FC<Props> = ({id, name, value, onChange, maps, setStartPo
             value={compValue}
             onChange={(e) => setCompValue(e.target.value)}
           />
-          {id==="startPoint"?<button onClick={(e:any) => {e.preventDefault(); addWaypointTest()}}>Add</button>:<></>}
+          {id==="startPoint"?
+          <div className='text-center mt-2'>
+            <button className='btn btn-primary shadow' onClick={(e:any) => {e.preventDefault(); addWaypointTest()}}>Hozzáadás</button>
+          </div>
+          :<></>}
         </div>
       </>
     )

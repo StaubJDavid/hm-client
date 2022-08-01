@@ -8,36 +8,6 @@ import {setStartPoint, setEndPoint, setWaypoints, setDirectionResult, addWaypoin
 import OwnAutocomplete from './OwnAutocomplete';
 import OwnAutocompleteWP from './OwnAutocompleteWP';
 
-const containerStyle = {
-    width: '400px',
-    height: '400px'
-  };
-  
-
-
-//import {getContainers} from '../actions/containerActions';
-//import UpcomingContainers from './Container/UpcomingContainers';
-//import Containers from './Container/Containers';
-
-enum TravelMode {
-    /**
-     * Specifies a bicycling directions request.
-     */
-    BICYCLING = 'BICYCLING',
-    /**
-     * Specifies a driving directions request.
-     */
-    DRIVING = 'DRIVING',
-    /**
-     * Specifies a transit directions request.
-     */
-    TRANSIT = 'TRANSIT',
-    /**
-     * Specifies a walking directions request.
-     */
-    WALKING = 'WALKING',
-  }
-
 declare type Libraries = ("drawing" | "geometry" | "localContext" | "places" | "visualization")[];
 const googleLibraries:Libraries = ["places"];
 
@@ -56,7 +26,7 @@ const OACGroup: FC<Props> = ({waypoints, changeWaypoint}) => {
         {waypoints.map((wp:string,index:number) => {
           return (
             <>
-              <OwnAutocompleteWP key={"wp"+index} id={"wp" + index} name={"wp" + index} index={index} value={waypoints[index].location} onChange={changeWpName} />
+              <OwnAutocompleteWP key={"wp"+index} id={"wp" + index} name={index+1 + ". Útipont"} index={index} value={waypoints[index].location} onChange={changeWpName} />
               <br/>
             </>
           )

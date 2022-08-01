@@ -20,10 +20,10 @@ const CommentInput: FC<Props> = ({container_id, postComment}) => {
                 value={text}
                 error={null} 
                 onChange={(e:any) => setText(e.target.value)}  
-                placeholder="Your message here..."
+                placeholder="Üzenet..."
             />
             <br />
-            <button onClick={(e:any) => {postComment(container_id,text);setText("")}} >Post comment</button>
+            <button onClick={(e:any) => {postComment(container_id,text);setText("")}} >Komment küldése</button>
         </div>
     )
 

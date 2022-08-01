@@ -10,6 +10,7 @@ import isEmpty from '../../helpers/isEmpty';
 import {SET_INPROGRESS_CONTAINERS} from '../../actions/types';
 import calculateMaxPage from '../../helpers/calculateMaxPage';
 import ContainerReactions from './ContainerReactions';
+import NoTourResult from './NoTourResult';
 
 type Props = {
     inProgressContainers:any,
@@ -39,10 +40,10 @@ const InProgressContainers: FC<Props> = ({inProgressContainers,getInProgressCont
     }
 
     if(isEmpty(inProgressContainers)){
-        return <div>Loading...</div>
+        return <div>Töltés...</div>
     }else{
         if(inProgressContainers.total === 0){
-            return <div>No result</div>
+            return <NoTourResult />
         }else{
             return (
                 <div className="d-flex flex-column h-100">

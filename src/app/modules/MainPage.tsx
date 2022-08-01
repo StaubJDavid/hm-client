@@ -39,7 +39,7 @@ const MainPage: FC<Props> = ({auth}) => {
                                 className={classNames("btn mx-2",{"btn-primary":currentContainerSelection === "upcoming", "btn-secondary":currentContainerSelection !== "upcoming"})}
                                 onClick={() => {setTourContainers(<UpcomingContainers />); setCurrentContainerSelection("upcoming")} } 
                             >
-                                Upcoming Tours
+                                Következő túrák
                             </button>
                         </div>
                         <div className="col">
@@ -47,7 +47,7 @@ const MainPage: FC<Props> = ({auth}) => {
                                 className={classNames("btn mx-2",{"btn-primary":currentContainerSelection === "inprogress", "btn-secondary":currentContainerSelection !== "inprogress"})}
                                 onClick={() => {setTourContainers(<InProgressContainers />); setCurrentContainerSelection("inprogress")} } 
                             >
-                                In Progress Tours
+                                Folyamatban lévő túrák
                             </button>
                         </div>
                         <div className="col">
@@ -55,11 +55,11 @@ const MainPage: FC<Props> = ({auth}) => {
                                 className={classNames("btn mx-2",{"btn-primary":currentContainerSelection === "past", "btn-secondary":currentContainerSelection !== "past"})}
                                 onClick={() => {setTourContainers(<PastContainers />); setCurrentContainerSelection("past") }} 
                             >
-                                Past Tours
+                                Régi túrák
                             </button>
                         </div>
                         {auth.isAuthenticated?<div className="col">
-                            <button className='btn btn-success' onClick={() => navigate(`/createcontainer`)}>Create Container</button>
+                            <button className='btn btn-success' onClick={() => navigate(`/createcontainer`)}>Túra kiírása</button>
                         </div>:<></>}
                     </div>
                 </div>

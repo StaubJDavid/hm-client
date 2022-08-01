@@ -104,19 +104,19 @@ const OwnMap: FC<Props> = ({onClick,onIdle,children,style,maps,setMap,
 
         if(maps.startPoint !== "" && maps.endPoint !== ""){
             console.log("Calculating route with api");
-            //console.log(request);
-            ownDirectionService.route(request, (result:any, status:any) => {
+            console.log(request);
+            /*ownDirectionService.route(request, (result:any, status:any) => {
                 if(status === 'OK'){
                     console.log(result);
                     ownDirectionRenderer.setDirections(result);
                 }
-            })
+            })*/
         }
     }
 
     useEffect(() => {
-        if(calculateRouteInMap !== 0) calcRoute();
-    }, [calculateRouteInMap])
+        calculateRouteInMap.current = () => calcRoute();
+    }, [])
 
     useEffect(() => {
         if (ref.current && !map) {
@@ -159,6 +159,7 @@ const OwnMap: FC<Props> = ({onClick,onIdle,children,style,maps,setMap,
 
     return (
         <>
+            <button onClick={(e:any) => {e.preventDefault();calcRoute();}}>Click</button>
             <div style={style} ref={ref} id="map"></div>
             {React.Children.map(children, (child) => {
                 if(React.isValidElement(child)){
