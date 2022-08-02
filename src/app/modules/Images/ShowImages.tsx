@@ -1,29 +1,44 @@
-import React, { Component } from "react";
+import React, { Component, FC } from "react";
 import axios from 'axios';
 import {connect} from 'react-redux';
 import {} from '../../actions/containerActions';
 import isEmpty from '../../helpers/isEmpty';
+import Image from './Image';
 
 type Props = {
     container:any
 }
 
-type State = {
-}
+const ShowImages: FC<Props> = ({container}) => {
 
-class ShowImages extends Component<Props,State> {
-    render () {
-        return (
-            <div>
-                {this.props.container.currentContainer.images.map((i:any) => {
-                    return <>
-                        <img key={i.image_id} src={`http://localhost:3001/${i.container_id}/${i.file_name}`} width='100' height='100' alt='waa'/>
-                        <button>Delete Picture</button>
-                    </>
-                })}
-            </div>
-        )
+    const deleteImage = () => {
+
     }
+
+    return (
+        <div className="of-auto d-flex flex-wrap mb-4 show-image-size">
+            {container.currentContainer.images.map((i:any) => {
+                return (
+                    <div className="mx-2">
+                        <div
+                            className="text-center mb-2 border border-2 border-dark rounded-3"
+                        >
+                            <Image imageData={{key: i.image_id, src: `http://localhost:3001/${i.container_id}/${i.file_name}`}} />
+                        </div>
+                        <div className="text-center mb-2">
+                            <button
+                                className="btn btn-primary"
+                                onClick={() => deleteImage()}
+                            >
+                                Kép törlése
+                            </button>
+                        </div>
+                    </div>
+                )
+                
+            })}
+        </div>
+    )
 }
 
 const mapStateToProps = (state:any)=>({

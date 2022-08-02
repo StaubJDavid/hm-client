@@ -91,7 +91,7 @@ const OwnAutocomplete: FC<Props> = ({id, name, value, onChange, maps, setStartPo
           />
           {id==="startPoint"?
           <div className='text-center mt-2'>
-            <button className='btn btn-primary shadow' onClick={(e:any) => {e.preventDefault(); addWaypointTest()}}>Hozzáadás</button>
+            <button className='btn btn-primary shadow' onClick={(e:any) => {e.preventDefault(); addWaypointTest()}}>Útipont Hozzáadása</button>
           </div>
           :<></>}
         </div>

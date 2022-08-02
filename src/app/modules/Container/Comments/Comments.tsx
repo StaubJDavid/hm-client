@@ -47,7 +47,7 @@ const Comments: FC<Props> = ({auth,comments,getComments, container_id}) => {
 
     return (
         <>
-            {auth.isAuthenticated?<CommentInput container_id={container_id} />:<></>}
+            {auth.isAuthenticated?<div className='border-bottom border-2 pb-2'><CommentInput container_id={container_id} /></div>:<></>}
             <br/>
             {commentsContent}
         </>

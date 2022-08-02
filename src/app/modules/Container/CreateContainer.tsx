@@ -64,7 +64,7 @@ const CreateContainer: FC<Props> = ({errors,maps,createContainer,clearContainer,
     return (
         <div className='container bg-white middle of-auto px-5'>
             <h1 className="display-4 text-center fw-bold mb-5">Túra tervezés</h1>
-            <form className="of-auto" onSubmit={(e:any) => onSubmit(e)}>
+            <form onSubmit={(e:any) => onSubmit(e)}>
 
                 <h2 className="fw-bold mb-2">Túra címe</h2>
                 <TextInput

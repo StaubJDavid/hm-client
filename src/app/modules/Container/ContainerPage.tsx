@@ -9,6 +9,7 @@ import {useParams, useNavigate} from 'react-router-dom';
 import isEmpty from '../../helpers/isEmpty';
 import OwnMapStatic from '../OwnMapStatic';
 import Comments from './Comments/Comments';
+import TextArea from '../../common/TextArea';
 
 type Props = {
     errors:any;
@@ -55,17 +56,37 @@ const ContainerPage: FC<Props> = ({errors,currentContainer,getContainer,clearMap
     if(!isEmpty(currentContainer)){
         console.log(currentContainer);
         content = <>
-            <div>Static Map</div>
-            <div>Container id: {currentContainer.container_id}</div>
-            <div>creator_id: {currentContainer.creator_id}</div>
-            <div>role: {currentContainer.role}</div>
-            <div>title: {currentContainer.title}</div>
-            <div>message: {currentContainer.message}</div>
-            <div>created: {currentContainer.created}</div>
-            <div>time_start: {currentContainer.time_start}</div>
-            <div>time_end: {currentContainer.time_end}</div>
-            <div>name: {currentContainer.name}</div>
-            {/*remove comment for google maps
+            <h2 className="fw-bold my-2 text-center">{currentContainer.title}</h2>
+            <div className="container-fluid">
+                <div className="row mb-4">
+                    <div className="col-md-3 text-center">
+                        <div className={"fw-bold"}>Létrehozta</div>
+                        <div>{currentContainer.name}</div>
+                    </div>
+                    <div className="col-md-3 text-center">
+                        <div className={"fw-bold"}>Mikor Kezdődik</div>
+                        <div>{currentContainer.time_start}</div>
+                    </div>
+                    <div className="col-md-3 text-center">
+                        <div className={"fw-bold"}>Tervezett végpont</div>
+                        <div>{currentContainer.time_end}</div>
+                    </div>
+                    <div className="col-md-3 text-center">
+                        <div className={"fw-bold"}>Kiírva</div>
+                        <div>{currentContainer.created}</div>
+                    </div>
+                </div>
+            </div>
+            <TextArea
+                name="message" 
+                maxlength={16384}
+                value={currentContainer.message}
+                error={false} 
+                onChange={() => {}}  
+                placeholder="Terv, tudnivalók stb..."
+                classNamesInherited={"mb-4 text-area-no-resize description"}
+            />
+            <div style={{ display: "flex", height: "100%" }}>
             <Wrapper apiKey={apiKey} libraries={["places"]}>
                 <OwnMapStatic
                     style={{height:"100vh", width:"100vw", margin:"0", padding:"0"}}
@@ -76,16 +97,22 @@ const ContainerPage: FC<Props> = ({errors,currentContainer,getContainer,clearMap
                     endPoint={currentContainer.end_point}
                     waypoints={currentContainer.waypoints}
                 />
-    </Wrapper>*/}
-            <AddImagesButton container_id={currentContainer.container_id} />
-            <hr/>
-            <ShowImages />
-            <Comments container_id={currentContainer.container_id} />
+            </Wrapper>
+            </div>
+            <div>
+                <AddImagesButton container_id={currentContainer.container_id} />
+            </div>
+            <div className='mb-2 border-bottom'>
+                <ShowImages />
+            </div>
+            <div className='mt-2'>
+                <Comments container_id={currentContainer.container_id} />
+            </div>
         </>
     }
     
     return (
-        <div>
+        <div className='container bg-white middle of-auto px-5'>
             {content}
         </div>
     )

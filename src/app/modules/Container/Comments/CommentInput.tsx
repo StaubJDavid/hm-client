@@ -16,14 +16,20 @@ const CommentInput: FC<Props> = ({container_id, postComment}) => {
         <div>
             <TextArea
                 name="text" 
-                maxlength={255}
+                maxlength={2048}
                 value={text}
                 error={null} 
-                onChange={(e:any) => setText(e.target.value)}  
+                onChange={(e:any) => setText(e.target.value)}
+                classNamesInherited="text-area-no-resize"  
                 placeholder="Üzenet..."
             />
             <br />
-            <button onClick={(e:any) => {postComment(container_id,text);setText("")}} >Komment küldése</button>
+            <button
+                className='btn btn-primary'
+                onClick={(e:any) => {postComment(container_id,text);setText("")}}
+            >
+                Komment küldése
+            </button>
         </div>
     )
 

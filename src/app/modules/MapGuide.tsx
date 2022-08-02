@@ -9,36 +9,6 @@ import OwnAutocomplete from './OwnAutocomplete';
 import OwnAutocompleteWP from './OwnAutocompleteWP';
 import OACGroup from './OACGroup';
 
-const containerStyle = {
-    width: '400px',
-    height: '400px'
-  };
-  
-
-
-//import {getContainers} from '../actions/containerActions';
-//import UpcomingContainers from './Container/UpcomingContainers';
-//import Containers from './Container/Containers';
-
-enum TravelMode {
-    /**
-     * Specifies a bicycling directions request.
-     */
-    BICYCLING = 'BICYCLING',
-    /**
-     * Specifies a driving directions request.
-     */
-    DRIVING = 'DRIVING',
-    /**
-     * Specifies a transit directions request.
-     */
-    TRANSIT = 'TRANSIT',
-    /**
-     * Specifies a walking directions request.
-     */
-    WALKING = 'WALKING',
-  }
-
 declare type Libraries = ("drawing" | "geometry" | "localContext" | "places" | "visualization")[];
 const googleLibraries:Libraries = ["places"];
 
@@ -182,7 +152,7 @@ const MapGuide: FC<Props> = ({maps, setStartPoint, setEndPoint, setWaypoints, se
                   <OwnAutocomplete id={"endPoint"} name={"Végpont"} value={maps.endPoint} onChange={setEndPoint} />
                   
                     <div className='text-center mt-2'>
-                      <button className='btn btn-primary shadow' onClick={(e:any) => {e.preventDefault();doCalculateRoute(prev => prev + 1);}}>Calculate Route</button> 
+                      <button className='btn btn-primary shadow' onClick={(e:any) => {e.preventDefault();doCalculateRoute(prev => prev + 1);}}>Útvonal tervezése</button> 
                     </div>
                   </div>
             </Wrapper>

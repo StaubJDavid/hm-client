@@ -3,6 +3,8 @@ import axios from 'axios';
 import {connect} from 'react-redux';
 import {addImages, clearImages, deleteImage, uploadImages} from '../../actions/uploadActions';
 import isEmpty from '../../helpers/isEmpty';
+import Image from './Image';
+import 'bootstrap/js/dist/modal.js';
 
 type Props = {
     upload:any,
@@ -30,9 +32,25 @@ class ShowTempImages extends Component<Props,State> {
 
     render () {
         return (
-            <div>
-                {this.props.upload.images.map((i:any) => {
-                    return <><img key={i.index} src={URL.createObjectURL(i.file)} width='100' height='100' alt='waa'/><button onClick={() => this.deleteImage(i.index)}>Delete</button></>
+            <div className="of-auto-x d-flex flex-row mb-4">
+                {this.props.upload.images.map((i:any,index:any) => {
+                    return (
+                        <div className="mx-2">
+                            <div
+                                className="text-center mb-2 border border-2 border-dark rounded-3"
+                            >
+                                <Image imageData={{key: i.index, src: URL.createObjectURL(i.file)}} />
+                            </div>
+                            <div className="text-center mb-2">
+                                <button
+                                    className="btn btn-primary"
+                                    onClick={() => this.deleteImage(i.index)}
+                                >
+                                    Kép törlése
+                                </button>
+                            </div>
+                        </div>
+                    )
                 })}
             </div>
         )

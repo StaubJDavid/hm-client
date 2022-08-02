@@ -53,21 +53,24 @@ class AddImagesButton extends Component<Props,State> {
     render () {
         return (
             <div>
-                <form encType="multipart/form">
+                <form encType="multipart/form" className="text-center mb-4">
                     <br/>
                     <input 
                         type="file" 
                         name="files" 
-                        id="files" 
+                        id="files"
+                        accept="image/png, image/jpg, image/jpeg" 
                         multiple={true}
                         placeholder="Upload your files" 
                         onChange={this.fileSelectedHandler}
                     />
-                    <br/>
                     <button 
+                        className="btn btn-primary"
                         type="submit" 
                         onClick={this.fileUploadHandler}
-                    >Add Images</button>
+                    >
+                        Képek feltöltése
+                    </button>
                 </form>
                 
                 <div>
