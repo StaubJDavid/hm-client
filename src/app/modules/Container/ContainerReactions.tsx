@@ -1,18 +1,20 @@
 import React, { FC, useState, useEffect} from 'react';
 import {connect} from 'react-redux';
-import {postReaction} from '../../actions/containerActions';
+import {postReaction, postReactionPage} from '../../actions/containerActions';
 import isEmpty from '../../helpers/isEmpty';
 import classnames from 'classnames';
 
 type Props = {
+    containerPage:any;
     auth:any;
     container:any;
     index:any;
     disabled:any;
     postReaction:any;
+    postReactionPage:any;
 };
 
-const CreateContainer: FC<Props> = ({auth, container, index, disabled, postReaction}) => {
+const ContainerReactions: FC<Props> = ({auth, container, index, disabled, postReaction, containerPage, postReactionPage}) => {
     const [going, setGoing] = useState(false);
     const [notGoing, setNotGoing] = useState(false);
     const [notSure, setNotSure] = useState(false);
@@ -22,7 +24,14 @@ const CreateContainer: FC<Props> = ({auth, container, index, disabled, postReact
     const [notSurePerson, setNotSurePerson] = useState<any[]>([]);
 
     const onReactionClick = (reaction:any) => {
-        postReaction(container.container_id, reaction, container.reaction_id, index);
+        console.log("clicked");
+        if(containerPage){
+            console.log("in");
+            postReactionPage(container.container_id, reaction, container.reaction_id, index);
+        }else{
+            postReaction(container.container_id, reaction, container.reaction_id, index);
+        }
+        
     }
 
     useEffect(() => {
@@ -69,4 +78,4 @@ const mapStateToProps = (state:any)=>({
     auth:state.auth
 });
 
-export default connect(mapStateToProps, {postReaction})(CreateContainer);
+export default connect(mapStateToProps, {postReaction, postReactionPage})(ContainerReactions);

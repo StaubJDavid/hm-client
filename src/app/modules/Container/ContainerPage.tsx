@@ -11,6 +11,8 @@ import OwnMapStatic from '../OwnMapStatic';
 import Comments from './Comments/Comments';
 import TextArea from '../../common/TextArea';
 import Spinner from '../../common/Spinner';
+import ContainerReactions from './ContainerReactions'
+import compareCurrentDate from '../../helpers/compareCurrentDate';
 
 type Props = {
     errors:any;
@@ -77,6 +79,14 @@ const ContainerPage: FC<Props> = ({errors,currentContainer,getContainer,clearMap
                         <div>{currentContainer.created}</div>
                     </div>
                 </div>
+            </div>
+            <div className='mb-3'>
+                <ContainerReactions
+                    container={currentContainer}
+                    index={0}
+                    disabled={!compareCurrentDate(currentContainer.time_start)}
+                    containerPage={true}
+                />
             </div>
             <TextArea
                 name="message" 

@@ -104,7 +104,12 @@ const Container: FC<Props> = ({container, index, disabled}) => {
             </div>
             </div>
             <div className="card-footer">
-                <ContainerReactions container={container} index={index} disabled={disabled}/>
+                <ContainerReactions
+                    container={container}
+                    index={index}
+                    disabled={disabled}
+                    containerPage={false}
+                />
             </div>
 
         </div>

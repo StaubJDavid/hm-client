@@ -194,6 +194,79 @@ export const postReaction = (container_id:any, reaction:any, reaction_id:any, in
     )
 };
 
+export const postReactionPage = (container_id:any, reaction:any, reaction_id:any, index:any) => (dispatch:any) => {
+    axios.post(`/api/container/reaction/${container_id}`, {reaction: reaction, reaction_id: reaction_id})
+    .then (res => {
+        console.log(res.data);
+        const oldContainer = store.getState().container.currentContainer;
+        const userId = store.getState().auth.user.id;
+        let newContainer = JSON.parse(JSON.stringify(oldContainer));
+        //console.log(newContainer);
+        //console.log(res.data);
+        if(res.data.route === "delete"){
+            //console.log("Delete Route");
+            newContainer.own_reaction = "none";
+            newContainer.reaction_id = null;
+            newContainer.reactions[reaction]--;
+
+            const reactedUserIndex = newContainer.reacted_users.findIndex((o:any) => {
+                return o.user_id === userId;
+            })
+
+            newContainer.reacted_users.splice(reactedUserIndex,1);
+
+            console.log(newContainer);
+            console.log(oldContainer);
+
+            dispatch({
+                type: GET_CONTAINER,
+                payload: newContainer
+            })
+
+        }else if(res.data.route === "update"){
+            //console.log("Update Route");
+            newContainer.reactions[newContainer.own_reaction]--;
+            newContainer.reactions[reaction]++;
+            newContainer.own_reaction = reaction;
+            newContainer.reaction_id = reaction_id;
+
+            const reactedUserIndex = newContainer.reacted_users.findIndex((o:any) => {
+                return o.user_id === userId;
+            })
+            console.log(reactedUserIndex);
+            newContainer.reacted_users[reactedUserIndex].reaction = reaction;
+
+            dispatch({
+                type: GET_CONTAINER,
+                payload: newContainer
+            })
+
+        }else if(res.data.route === "insert"){
+            //console.log(res.data);
+            const {reacted_users, success} = res.data;
+            //console.log("Insert Route");
+            newContainer.own_reaction = success[0].reaction;
+            newContainer.reaction_id = success[0].tr_id;
+            newContainer.reactions[success[0].reaction]++;
+
+            newContainer.reacted_users.push(reacted_users[0]);
+
+            dispatch({
+                type: GET_CONTAINER,
+                payload: newContainer
+            })
+        }
+    }).catch(
+        err => {
+            /*dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })*/
+            console.log(err);
+        }
+    )
+};
+
 export const clearContainer = () => (dispatch:any) => {
     dispatch({
         type: CLEAR_CONTAINER
