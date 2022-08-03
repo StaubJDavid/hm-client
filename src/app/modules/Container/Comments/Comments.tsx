@@ -5,6 +5,7 @@ import CommentInput from './CommentInput';
 import {getComments} from '../../../actions/commentActions';
 import { SET_COMMENTS } from '../../../actions/types';
 import isEmpty from '../../../helpers/isEmpty';
+import Spinner from '../../../common/Spinner';
 
 type Props = {
     auth:any;
@@ -31,10 +32,10 @@ const Comments: FC<Props> = ({auth,comments,getComments, container_id}) => {
     let commentsContent = <></>
 
     if(comments === null){
-        commentsContent = <div>Töltés...</div>
+        commentsContent = <Spinner size={4}/>
     }else{
         if(isEmpty(comments)){
-            commentsContent = <div>Nincs komment</div>
+            commentsContent = <div></div>
         }else{
             commentsContent = <>
                 {comments.map((c:any) => {

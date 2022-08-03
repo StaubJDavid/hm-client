@@ -127,8 +127,8 @@ const OwnMap: FC<Props> = ({style,
         if (ref.current && !map) {
             console.log("what");
 
-            setDirectionService(new window.google.maps.DirectionsService());
-            setDirectionRenderer(new window.google.maps.DirectionsRenderer());
+            /*setDirectionService(new window.google.maps.DirectionsService());
+            setDirectionRenderer(new window.google.maps.DirectionsRenderer());*/
 
             setMap(new window.google.maps.Map(ref.current, {}));
 

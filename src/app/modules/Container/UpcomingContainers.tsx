@@ -11,6 +11,7 @@ import calculateMaxPage from '../../helpers/calculateMaxPage';
 import {SET_UPCOMING_CONTAINERS} from '../../actions/types';
 import ContainerReactions from './ContainerReactions';
 import NoTourResult from './NoTourResult';
+import Spinner from '../../common/Spinner';
 
 type Props = {
     upcomingContainers:any,
@@ -41,7 +42,7 @@ const UpcomingContainers: FC<Props> = ({upcomingContainers,getUpcomingContainers
     }
 
     if(isEmpty(upcomingContainers)){
-        return <div>Töltés...</div>
+        return <Spinner size={4}/>
     }else{
         if(upcomingContainers.total === 0){
             return <NoTourResult />

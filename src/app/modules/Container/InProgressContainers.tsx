@@ -11,6 +11,7 @@ import {SET_INPROGRESS_CONTAINERS} from '../../actions/types';
 import calculateMaxPage from '../../helpers/calculateMaxPage';
 import ContainerReactions from './ContainerReactions';
 import NoTourResult from './NoTourResult';
+import Spinner from '../../common/Spinner';
 
 type Props = {
     inProgressContainers:any,
@@ -40,7 +41,7 @@ const InProgressContainers: FC<Props> = ({inProgressContainers,getInProgressCont
     }
 
     if(isEmpty(inProgressContainers)){
-        return <div>Töltés...</div>
+        return <Spinner size={4}/>
     }else{
         if(inProgressContainers.total === 0){
             return <NoTourResult />

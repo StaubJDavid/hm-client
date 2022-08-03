@@ -22,7 +22,7 @@ const TextArea: FC<Props> = ({
         info,
         classNamesInherited
     }) => (
-        <div className="form-group">
+        <div className="form-group mb-2">
             <textarea 
             rows={5}
             maxLength={maxlength}

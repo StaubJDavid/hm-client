@@ -30,7 +30,7 @@ const MainPage: FC<Props> = ({auth}) => {
 // style={{height: "calc(100% - 65px)"}}
     return (
 
-        <div className={"container bg-white"} style={{height: "calc(100vh - 56px)"}}>
+        <div className={"container bg-white middle"} >
             <div className={"d-flex justify-content-center border-bottom border-dark border-3 py-3"}>
                 <div className="container text-center">
                     <div className="row">

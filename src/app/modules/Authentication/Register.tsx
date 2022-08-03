@@ -123,7 +123,7 @@ class Register extends Component<Props,State> {
                 </div>
                 </div>*/
 
-            <div className='container bg-white middle'>
+            <div className='container bg-white middle of-auto'>
                 <div className="d-flex flex-column align-items-center justify-content-center" >
                     <div>
                         <h1 className="display-4 text-center fw-bold mb-5">Regisztráció</h1>
@@ -133,11 +133,11 @@ class Register extends Component<Props,State> {
                         <TextInput
                             name="nickname" 
                             value={this.state.nickname}
-                            error={errors.nickname} 
+                            error={errors.name} 
                             type="text"
                             onChange={this.onChange}  
                             placeholder="Kitalált Pista"
-                            classNamesInherited={"mb-2"}
+                            
                         />
                         <h2 className="fw-bold mb-2">E-mail cím</h2>
                         <TextInput
@@ -147,7 +147,7 @@ class Register extends Component<Props,State> {
                             type="email"
                             onChange={this.onChange}  
                             placeholder="valamicim@gmail.com"
-                            classNamesInherited={"mb-2"}
+                            
                         />
                         <h2 className="fw-bold mb-2">Bemutatkozás</h2>
                         <TextArea
@@ -157,7 +157,7 @@ class Register extends Component<Props,State> {
                             error={errors.message} 
                             onChange={this.onChange}  
                             placeholder="Helló, én vagyok az tudod onnan abból a cuccosból én vagyok az"
-                            classNamesInherited={"text-area-no-resize mb-2"}
+                            classNamesInherited={"text-area-no-resize"}
                         />
                         <h2 className="fw-bold mb-2">Jelszó</h2>
                         <TextInput
@@ -167,7 +167,7 @@ class Register extends Component<Props,State> {
                             type="password"
                             onChange={this.onChange}  
                             placeholder="Jelszó"
-                            classNamesInherited={"mb-2"}
+                            
                         />
                         <h2 className="fw-bold mb-2">Jelszó megismétlése</h2>
                         <TextInput
@@ -177,7 +177,6 @@ class Register extends Component<Props,State> {
                             type="password"
                             onChange={this.onChange}  
                             placeholder="Jelszó ismétlés"
-                            classNamesInherited={"mb-2"}
                         />
                         <div className='text-center'>
                             <input type="submit" value={"Regisztrálás"} className="btn btn-info btn-block mt-4 fw-bolder fs-3" />

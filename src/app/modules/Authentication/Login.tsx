@@ -68,8 +68,8 @@ class Login extends Component<Props,State> {
                             type="email"
                             onChange={this.onChange}  
                             placeholder="E-mail cím"
-                            classNamesInherited={"mb-5"}
                         />
+                        <div className='mb-5' />
                         <h2 className="fw-bold mb-2">Jelszó</h2>
                         <TextInput 
                             type="password"
@@ -78,7 +78,6 @@ class Login extends Component<Props,State> {
                             onChange={this.onChange}
                             error={errors.password}
                             placeholder="Jelszó"
-                            classNamesInherited={"mb-4"}
                         />
                         <div className='text-center'>
                             <input type="submit" value={"Bejelentkezés"} className="btn btn-info btn-block mt-4 fw-bolder fs-3" />

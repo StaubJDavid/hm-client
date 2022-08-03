@@ -2,6 +2,7 @@ import React, {FC, Component,useState, useEffect} from 'react';
 import {connect} from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import {getUnapprovedUsers} from '../../actions/adminActions';
+import Spinner from '../../common/Spinner';
 import isEmpty from '../../helpers/isEmpty';
 import UnapprovedUser from './UnapprovedUser';
 
@@ -22,16 +23,19 @@ const ApprovePage: FC<Props> = ({auth, unapprovedUsers, getUnapprovedUsers}) => 
 
 
     if(unapprovedUsers === null ){
-        return <div>Loading...</div>
+        return <Spinner size={4}/>
     }else if(isEmpty(unapprovedUsers)){
-        return <div>No users waiting to be approved</div>
+        return <div className='container bg-white middle of-auto px-5'>
+                    <h2 className="fw-bold my-2 text-center">Jóváhagyás</h2>
+                </div>
     }else {
         return (
-            <>
+            <div className='container bg-white middle of-auto px-5'>
+                <h2 className="fw-bold my-2 text-center">Jóváhagyás</h2>
                 {!isEmpty(unapprovedUsers)?unapprovedUsers.map((u:any) => {
                     return <UnapprovedUser user={u} />
                 }):<></>}
-            </>
+            </div>
         )
     }
 };

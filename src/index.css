@@ -21,6 +21,7 @@ body {
 
 .middle {
   max-height: calc(100vh - 56px);
+  height: calc(100vh - 56px);
 }
 
 .description {
@@ -70,3 +71,13 @@ body {
   width: auto;
   height: auto;
 }*/
+
+.extended-content-container {
+  width: 500%;
+  margin-left: -200%;
+}
+
+.verticalAlign {
+  display: table-cell;
+  vertical-align: middle;
+}

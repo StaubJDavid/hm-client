@@ -1,6 +1,7 @@
 import React, { FC, useEffect} from 'react';
 import {connect} from 'react-redux';
 import {refuseUser, approveUser} from '../../actions/adminActions';
+import TextArea from '../../common/TextArea';
 import timeFormat from '../../helpers/timeFormat';
 
 type Props = {
@@ -14,14 +15,46 @@ const UnapprovedUser: FC<Props> = ({user, refuseUser, approveUser}) => {
     let {email, user_id, name, message, registered, role} = user;
 
     return (
-        <div className="mb-5">
-            <div>Email: {email}</div>
-            <div>Name: {name}</div>
-            <div>Role: {role}</div>
-            <div>message: {message}</div>
-            <div>registered: {timeFormat(registered)}</div>
-            <button onClick={() => approveUser(user_id)}>Approve</button>
-            <button onClick={() => refuseUser(user_id)}>Refuse</button>
+        <div className="container-fluid mb-5 border-rounded border px-3 pb-3">
+            <div className="row mb-2">
+                <div className="col-md-6 text-center fw-bold fs-3">
+                    {email}
+                </div>
+                <div className="col-md-6 text-center fw-bold fs-3">
+                    {name}
+                </div>
+            </div>
+            <div className="row">
+                <div className="col-md-12">
+                    <TextArea
+                        name="message" 
+                        maxlength={255}
+                        value={message}
+                        error={false} 
+                        onChange={() => {}}  
+                        placeholder="Helló, én vagyok az tudod onnan abból a cuccosból én vagyok az"
+                        classNamesInherited={"text-area-no-resize mb-2"}
+                    />
+                </div>
+            </div>
+            <div className="row">
+                <div className="col-md-6 text-center">
+                    <button
+                        className='btn btn-success fw-bold fs-5'
+                        onClick={() => approveUser(user_id)}
+                    >
+                        Jóváhagyás
+                    </button>
+                </div>
+                <div className="col-md-6 text-center">
+                    <button
+                        className='btn btn-danger fw-bold fs-5'
+                        onClick={() => refuseUser(user_id)}
+                    >
+                        Elutasítás
+                    </button>
+                </div>
+            </div>
         </div>
     )
 };

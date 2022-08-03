@@ -10,6 +10,7 @@ import isEmpty from '../../helpers/isEmpty';
 import OwnMapStatic from '../OwnMapStatic';
 import Comments from './Comments/Comments';
 import TextArea from '../../common/TextArea';
+import Spinner from '../../common/Spinner';
 
 type Props = {
     errors:any;
@@ -51,7 +52,7 @@ const ContainerPage: FC<Props> = ({errors,currentContainer,getContainer,clearMap
         }
     },[errors])
 
-    let content = <>sad</>;
+    let content = <Spinner size={4}/>;
 
     if(!isEmpty(currentContainer)){
         console.log(currentContainer);

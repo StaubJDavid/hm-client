@@ -11,6 +11,7 @@ import {SET_PAST_CONTAINERS} from '../../actions/types';
 import calculateMaxPage from '../../helpers/calculateMaxPage';
 import ContainerReactions from './ContainerReactions';
 import NoTourResult from './NoTourResult';
+import Spinner from '../../common/Spinner';
 
 type Props = {
     pastContainers:any,
@@ -40,7 +41,7 @@ const PastContainers: FC<Props> = ({pastContainers,getPastContainers}) => {
     }
 
     if(isEmpty(pastContainers)){
-        return <div>Töltés...</div>
+        return <Spinner size={4}/>
     }else{
         if(pastContainers.total === 0){
             return <NoTourResult />

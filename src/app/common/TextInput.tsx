@@ -26,7 +26,7 @@ const TextInput: FC<Props> = ({
         info,
         classNamesInherited
     }) => (
-        <div className="form-group">
+        <div className="form-group mb-2">
             <input 
             type={type} 
             className={classnames(`form-control form-control-lg ${classNamesInherited}`,{"is-invalid":error})} 

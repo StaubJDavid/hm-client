@@ -45,7 +45,7 @@ const Image:React.FC<ImageProps> = ({imageData}) => {
             <img
                 key={imageData.key}
                 src={imageData.src}
-                className={"rounded-3"}
+                className={"rounded-3 pointer-cursor"}
                 width='128'
                 height='100'
                 alt='waa'
