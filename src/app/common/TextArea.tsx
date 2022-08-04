@@ -26,7 +26,7 @@ const TextArea: FC<Props> = ({
             <textarea 
             rows={5}
             maxLength={maxlength}
-            className={classnames(`form-control form-control-lg ${classNamesInherited}`,{"is-invalid":error})} 
+            className={classnames(`form-control form-control-lg shadow ${classNamesInherited}`,{"is-invalid":error})} 
             placeholder={placeholder}
             value={value} 
             onChange={onChange}

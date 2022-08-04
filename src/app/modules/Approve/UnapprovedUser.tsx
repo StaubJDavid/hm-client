@@ -15,7 +15,7 @@ const UnapprovedUser: FC<Props> = ({user, refuseUser, approveUser}) => {
     let {email, user_id, name, message, registered, role} = user;
 
     return (
-        <div className="container-fluid mb-5 border-rounded border px-3 pb-3">
+        <div className="container-fluid mb-5 border-rounded border px-3 pb-3 shadow-sm">
             <div className="row mb-2">
                 <div className="col-md-6 text-center fw-bold fs-3">
                     {email}
@@ -40,7 +40,7 @@ const UnapprovedUser: FC<Props> = ({user, refuseUser, approveUser}) => {
             <div className="row">
                 <div className="col-md-6 text-center">
                     <button
-                        className='btn btn-success fw-bold fs-5'
+                        className='btn btn-success fw-bold fs-5 shadow'
                         onClick={() => approveUser(user_id)}
                     >
                         Jóváhagyás
@@ -48,7 +48,7 @@ const UnapprovedUser: FC<Props> = ({user, refuseUser, approveUser}) => {
                 </div>
                 <div className="col-md-6 text-center">
                     <button
-                        className='btn btn-danger fw-bold fs-5'
+                        className='btn btn-danger fw-bold fs-5 shadow'
                         onClick={() => refuseUser(user_id)}
                     >
                         Elutasítás

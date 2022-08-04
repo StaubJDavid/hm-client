@@ -15,13 +15,14 @@ import ContainerReactions from './ContainerReactions'
 import compareCurrentDate from '../../helpers/compareCurrentDate';
 
 type Props = {
+    auth:any;
     errors:any;
     currentContainer:any;
     getContainer:any;
     clearMapsEverything:any;
 };
 
-const ContainerPage: FC<Props> = ({errors,currentContainer,getContainer,clearMapsEverything}) => {
+const ContainerPage: FC<Props> = ({auth,errors,currentContainer,getContainer,clearMapsEverything}) => {
     let { c_id } = useParams();
     const navigate = useNavigate();
 
@@ -100,7 +101,7 @@ const ContainerPage: FC<Props> = ({errors,currentContainer,getContainer,clearMap
             <div style={{ display: "flex", height: "100%" }}>
             <Wrapper apiKey={apiKey} libraries={["places"]}>
                 <OwnMapStatic
-                    style={{height:"100vh", width:"100vw", margin:"0", padding:"0"}}
+                    style={{height:"100%", width:"100%", margin:"0", padding:"0"}}
                     center={center}
                     zoom={zoom}
                     onZoom={setZoom}
@@ -111,10 +112,10 @@ const ContainerPage: FC<Props> = ({errors,currentContainer,getContainer,clearMap
             </Wrapper>
             </div>
             <div>
-                <AddImagesButton container_id={currentContainer.container_id} />
+                {auth.isAuthenticated?<AddImagesButton container_id={currentContainer.container_id} />:<></>}
             </div>
             <div className='mb-2 border-bottom'>
-                <ShowImages />
+                {auth.isAuthenticated?<ShowImages />:<></>}
             </div>
             <div className='mt-2'>
                 <Comments container_id={currentContainer.container_id} />
@@ -131,7 +132,8 @@ const ContainerPage: FC<Props> = ({errors,currentContainer,getContainer,clearMap
 
 const mapStateToProps = (state:any)=>({
     currentContainer: state.container.currentContainer,
-    errors: state.errors
+    errors: state.errors,
+    auth: state.auth,
 });
 
 export default connect(mapStateToProps, {getContainer,clearMapsEverything})(ContainerPage);

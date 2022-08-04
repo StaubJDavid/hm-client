@@ -18,7 +18,7 @@ const Comment: FC<Props> = ({data, auth, deleteComment}) => {
 
         commentContent = (
         <>
-        <div className="container-fluid mb-4 border border-2 p-2 rounded-3">
+        <div className="container-fluid mb-4 border border-2 p-2 rounded-3 shadow">
             <div className="row">
                 <div className="col-md-4">
                     <div className='text-center fw-bold fs-3 mb-2'>

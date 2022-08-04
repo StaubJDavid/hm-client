@@ -179,7 +179,7 @@ class Register extends Component<Props,State> {
                             placeholder="Jelszó ismétlés"
                         />
                         <div className='text-center'>
-                            <input type="submit" value={"Regisztrálás"} className="btn btn-info btn-block mt-4 fw-bolder fs-3" />
+                            <input type="submit" value={"Regisztrálás"} className="btn btn-primary btn-block mt-4 fw-bolder fs-3 shadow" />
                         </div>
                     </form>
                 </div>

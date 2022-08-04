@@ -29,7 +29,7 @@ const TextInput: FC<Props> = ({
         <div className="form-group mb-2">
             <input 
             type={type} 
-            className={classnames(`form-control form-control-lg ${classNamesInherited}`,{"is-invalid":error})} 
+            className={classnames(`form-control form-control-lg shadow ${classNamesInherited}`,{"is-invalid":error})} 
             placeholder={placeholder}
             value={value} 
             onChange={onChange}

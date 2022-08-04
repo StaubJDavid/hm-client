@@ -36,7 +36,7 @@ const MainPage: FC<Props> = ({auth}) => {
                     <div className="row">
                         <div className="col">
                             <button
-                                className={classNames("btn mx-2",{"btn-primary":currentContainerSelection === "upcoming", "btn-secondary":currentContainerSelection !== "upcoming"})}
+                                className={classNames("btn mx-2 shadow",{"btn-primary":currentContainerSelection === "upcoming", "btn-secondary":currentContainerSelection !== "upcoming"})}
                                 onClick={() => {setTourContainers(<UpcomingContainers />); setCurrentContainerSelection("upcoming")} } 
                             >
                                 Következő túrák
@@ -44,7 +44,7 @@ const MainPage: FC<Props> = ({auth}) => {
                         </div>
                         <div className="col">
                             <button
-                                className={classNames("btn mx-2",{"btn-primary":currentContainerSelection === "inprogress", "btn-secondary":currentContainerSelection !== "inprogress"})}
+                                className={classNames("btn mx-2 shadow",{"btn-primary":currentContainerSelection === "inprogress", "btn-secondary":currentContainerSelection !== "inprogress"})}
                                 onClick={() => {setTourContainers(<InProgressContainers />); setCurrentContainerSelection("inprogress")} } 
                             >
                                 Folyamatban lévő túrák
@@ -52,7 +52,7 @@ const MainPage: FC<Props> = ({auth}) => {
                         </div>
                         <div className="col">
                             <button
-                                className={classNames("btn mx-2",{"btn-primary":currentContainerSelection === "past", "btn-secondary":currentContainerSelection !== "past"})}
+                                className={classNames("btn mx-2 shadow",{"btn-primary":currentContainerSelection === "past", "btn-secondary":currentContainerSelection !== "past"})}
                                 onClick={() => {setTourContainers(<PastContainers />); setCurrentContainerSelection("past") }} 
                             >
                                 Régi túrák

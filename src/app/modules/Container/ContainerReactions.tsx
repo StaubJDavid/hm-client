@@ -48,7 +48,7 @@ const ContainerReactions: FC<Props> = ({auth, container, index, disabled, postRe
     return (
         <div className='d-flex justify-content-center'>
             <button
-            className={classnames("btn btn-primary",{"btn-success":container.own_reaction === "going"})}
+            className={classnames("btn btn-primary shadow",{"btn-success":container.own_reaction === "going"})}
             onClick={() => onReactionClick("going")}
             disabled={!auth.isAuthenticated || disabled}
             >
@@ -56,7 +56,7 @@ const ContainerReactions: FC<Props> = ({auth, container, index, disabled, postRe
             </button>
 
             <button
-            className={classnames("btn btn-primary mx-5",{"btn-success":container.own_reaction === "not_going"})}
+            className={classnames("btn btn-primary mx-5 shadow",{"btn-success":container.own_reaction === "not_going"})}
             onClick={() => onReactionClick("not_going")}
             disabled={!auth.isAuthenticated || disabled}
             >
@@ -64,7 +64,7 @@ const ContainerReactions: FC<Props> = ({auth, container, index, disabled, postRe
             </button>
 
             <button
-            className={classnames("btn btn-primary",{"btn-success":container.own_reaction === "not_sure"})}
+            className={classnames("btn btn-primary shadow",{"btn-success":container.own_reaction === "not_sure"})}
             onClick={() => onReactionClick("not_sure")}
             disabled={!auth.isAuthenticated || disabled}
             >

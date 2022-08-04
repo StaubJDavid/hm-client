@@ -123,7 +123,7 @@ const CreateContainer: FC<Props> = ({errors,maps,createContainer,clearContainer,
                 <MapGuide />
 
                 <div className='text-center mb-4'>
-                    <input type="submit" value="Túra létrehozása" className="btn btn-info btn-block mt-4 fw-bolder fs-3" />
+                    <input type="submit" value="Túra létrehozása" className="btn btn-primary btn-block mt-4 fw-bolder fs-3 shadow" />
                 </div>
             </form>
         </div>

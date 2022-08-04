@@ -33,7 +33,7 @@ const Container: FC<Props> = ({container, index, disabled}) => {
     }
     return (
         <div
-            className={classNames("card mb-4", {"bg-light pointer-cursor": onHover, "bg-white":!onHover})}
+            className={classNames("card mb-4 shadow", {"bg-light pointer-cursor": onHover, "bg-white":!onHover})}
         >
             <div
                 onMouseEnter={() => setOnHover(true)}
