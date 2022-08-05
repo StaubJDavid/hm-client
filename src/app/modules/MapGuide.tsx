@@ -135,7 +135,7 @@ const MapGuide: FC<Props> = ({maps, setStartPoint, setEndPoint, setWaypoints, se
         <div style={{ display: "flex", height: "100%" }}>
             <Wrapper apiKey={apiKey} libraries={["places"]}>
                 <OwnMap
-                  style={{height:"100vh", width:"100vw", margin:"0", padding:"0"}}
+                  style={{height:"80vh", width:"80vw", margin:"0", padding:"0"}}
                   center={center}
                   zoom={zoom}
                   onClick={onClick}
