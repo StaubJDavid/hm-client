@@ -17,13 +17,13 @@ const ShowImages: FC<Props> = ({container}) => {
 
     return (
         <div className="of-auto d-flex flex-wrap mb-4 show-image-size">
-            {container.currentContainer.images.map((i:any) => {
+            {container.currentContainer.images.map((image:any,index:any) => {
                 return (
                     <div className="mx-2">
                         <div
                             className="text-center mb-2 border border-2 border-dark rounded-3"
                         >
-                            <Image imageData={{key: i.image_id, src: `http://localhost:3001/${i.container_id}/${i.file_name}`}} />
+                            <Image imageData={{key: image.image_id, src: `http://localhost:3001/${image.container_id}/${image.file_name}`}} />
                         </div>
                         <div className="text-center mb-2">
                             <button

@@ -66,9 +66,12 @@ export const uploadImages = (files:any,container_id:string) => (dispatch:any) =>
         dispatch(clearImages());
         dispatch(getContainer(container_id));
     }).catch(
-        err => dispatch({
-            type: GET_ERRORS,
-            payload: err.response.data
-        })
+        err => {
+            /*dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            });*/
+            console.log(err);
+        }
     )
 };

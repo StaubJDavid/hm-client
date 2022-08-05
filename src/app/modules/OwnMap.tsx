@@ -159,7 +159,7 @@ const OwnMap: FC<Props> = ({onClick,onIdle,children,style,maps,setMap,
 
     return (
         <>
-            <div style={style} ref={ref} id="map"></div>
+            <div className='shadow' style={style} ref={ref} id="map"></div>
             {React.Children.map(children, (child) => {
                 if(React.isValidElement(child)){
                     return React.cloneElement(child, {map});

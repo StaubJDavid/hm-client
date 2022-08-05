@@ -98,10 +98,10 @@ const ContainerPage: FC<Props> = ({auth,errors,currentContainer,getContainer,cle
                 placeholder="Terv, tudnivalók stb..."
                 classNamesInherited={"mb-4 text-area-no-resize description"}
             />
-            <div style={{ display: "flex", height: "100%" }}>
+            
             <Wrapper apiKey={apiKey} libraries={["places"]}>
                 <OwnMapStatic
-                    style={{height:"100%", width:"100%", margin:"0", padding:"0"}}
+                    style={{height:"75vh", width:"100%", margin:"0", padding:"0"}}
                     center={center}
                     zoom={zoom}
                     onZoom={setZoom}
@@ -110,7 +110,6 @@ const ContainerPage: FC<Props> = ({auth,errors,currentContainer,getContainer,cle
                     waypoints={currentContainer.waypoints}
                 />
             </Wrapper>
-            </div>
             <div>
                 {auth.isAuthenticated?<AddImagesButton container_id={currentContainer.container_id} />:<></>}
             </div>

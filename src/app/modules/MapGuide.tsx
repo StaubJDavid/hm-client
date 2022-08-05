@@ -132,29 +132,37 @@ const MapGuide: FC<Props> = ({maps, setStartPoint, setEndPoint, setWaypoints, se
     const [calculateRoute, doCalculateRoute] = useState(0);
 
     return (
-        <div style={{ display: "flex", height: "100%" }}>
+        <div>
             <Wrapper apiKey={apiKey} libraries={["places"]}>
-                <OwnMap
-                  style={{height:"80vh", width:"80vw", margin:"0", padding:"0"}}
-                  center={center}
-                  zoom={zoom}
-                  onClick={onClick}
-                  calculateRouteInMap={calculateRoute}
-                >
-                  {clicks.map((latLng, i) => (
-                      <OwnMarker key={i} position={latLng} />
-                  ))}
-                  </OwnMap>
-                <div className='ms-3'>
-                  <OwnAutocomplete id={"startPoint"} name={"Kezdőpont"} value={maps.startPoint} onChange={setStartPoint} />
-                  <br/>
-                  <OACGroup />
-                  <OwnAutocomplete id={"endPoint"} name={"Végpont"} value={maps.endPoint} onChange={setEndPoint} />
-                  
-                    <div className='text-center mt-2'>
-                      <button className='btn btn-primary shadow' onClick={(e:any) => {e.preventDefault();doCalculateRoute(prev => prev + 1);}}>Útvonal tervezése</button> 
-                    </div>
+              <div className="container">
+                  <div className="row mb-4">
+                      <div className="col-md-8 text-center">
+                        <OwnMap
+                          style={{height:"80vh", width:"100%", margin:"0", padding:"0"}}
+                          center={center}
+                          zoom={zoom}
+                          onClick={onClick}
+                          calculateRouteInMap={calculateRoute}
+                        >
+                          {clicks.map((latLng, i) => (
+                              <OwnMarker key={i} position={latLng} />
+                          ))}
+                        </OwnMap>
+                      </div>
+                      <div className="col-md-4 text-center">
+                        <div className='ms-3'>
+                          <OwnAutocomplete id={"startPoint"} name={"Kezdőpont"} value={maps.startPoint} onChange={setStartPoint} />
+                          <br/>
+                          <OACGroup />
+                          <OwnAutocomplete id={"endPoint"} name={"Végpont"} value={maps.endPoint} onChange={setEndPoint} />
+                          
+                          <div className='text-center mt-2'>
+                            <button className='btn btn-primary shadow' onClick={(e:any) => {e.preventDefault();doCalculateRoute(prev => prev + 1);}}>Útvonal tervezése</button> 
+                          </div>
+                        </div>
+                      </div>
                   </div>
+              </div>
             </Wrapper>
             {/*form*/}
         </div>

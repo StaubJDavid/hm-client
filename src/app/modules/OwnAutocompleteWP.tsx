@@ -72,6 +72,7 @@ const OwnAutocompleteWP: FC<Props> = ({id, name, value, onChange, index, waypoin
       <>
         <div key={"wpoac"+id}>
           <label htmlFor={id}>{name}</label>
+          <br/>
           <input
             ref={ref}
             type="text"

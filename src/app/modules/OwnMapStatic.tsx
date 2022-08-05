@@ -160,7 +160,7 @@ const OwnMap: FC<Props> = ({style,
 
     return (
         <>
-            <div style={style} ref={ref} id="map"></div>
+            <div className='shadow' style={style} ref={ref} id="map"></div>
         </>
     )
 };
