@@ -1,4 +1,3 @@
-import axios from 'axios';
 import {GET_ERRORS,
     SET_MAP,
     SET_DIRECTION_RENDERER,

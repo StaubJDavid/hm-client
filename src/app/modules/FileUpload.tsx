@@ -62,7 +62,7 @@ class FileUpload extends Component<Props,State> {
             headers: { 'content-type': 'multipart/form-data' }
         }*/
         
-        axios.post("/api/image", formData)
+        axios.post(`/api/image`, formData)
             .then (res => {
                 console.log(res.data);
                 console.log(this.state.filename);

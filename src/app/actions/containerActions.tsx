@@ -33,7 +33,6 @@ export const getUpcomingContainers = (offset:number, currentPage:number, limit:n
 };
 
 export const getPastContainers = (offset:number, currentPage:number, limit:number) => (dispatch:any) => {
-    console.log("WATSA");
     axios.get(`/api/container/past`,{params:{limit:limit, offset:offset}})
     .then (res => {
         res.data.currentPage = currentPage;
