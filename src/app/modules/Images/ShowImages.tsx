@@ -22,7 +22,7 @@ const ShowImages: FC<Props> = ({container}) => {
                         <div
                             className="text-center mb-2 border border-2 border-dark rounded-3"
                         >
-                            <Image imageData={{key: image.image_id, src: `http://80.98.214.13:3001/${image.container_id}/${image.file_name}`}} />
+                            <Image imageData={{key: image.image_id, src: `${process.env.REACT_APP_API_URL}/${image.container_id}/${image.file_name}`}} />
                         </div>
                         <div className="text-center mb-2">
                             <button
