@@ -1,10 +1,9 @@
-import React, { Component} from 'react';
+import { Component} from 'react';
 import {connect} from 'react-redux';
 import { Navigate } from 'react-router-dom';
 import {registerUser, scuffed} from '../../actions/authActions';
 import TextInput from '../../common/TextInput';
 import TextArea from '../../common/TextArea';
-import { useNavigate } from 'react-router-dom';
 
 type Props = {
     registerUser:any,
@@ -69,60 +68,6 @@ class Register extends Component<Props,State> {
     render() {
         const {errors} = this.state;
         return (
-        /*<div className="register">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-md-8 m-auto">
-                            <h1 className="display-4 text-center">Sign Up</h1>
-                            <p className="lead text-center">Create your DevConnector account</p>
-                            <form onSubmit={this.onSubmit}>
-                                <TextInput
-                                    name="nickname" 
-                                    value={this.state.nickname}
-                                    error={errors.nickname} 
-                                    type="text"
-                                    onChange={this.onChange}  
-                                    placeholder="Nickname"
-                                />
-                                <TextInput
-                                    name="email" 
-                                    value={this.state.email}
-                                    error={errors.email} 
-                                    type="email"
-                                    onChange={this.onChange}  
-                                    placeholder="Email Address"
-                                />
-                                <TextArea
-                                    name="message" 
-                                    maxlength={255}
-                                    value={this.state.message}
-                                    error={errors.message} 
-                                    onChange={this.onChange}  
-                                    placeholder="Introduction"
-                                />
-                                <TextInput
-                                    name="password" 
-                                    value={this.state.password}
-                                    error={errors.password} 
-                                    type="password"
-                                    onChange={this.onChange}  
-                                    placeholder="Password"
-                                />
-                                <TextInput
-                                    name="password2" 
-                                    value={this.state.password2}
-                                    error={errors.password2} 
-                                    type="password"
-                                    onChange={this.onChange}  
-                                    placeholder="Repeat password"
-                                />
-                                <input type="submit" className="btn btn-info btn-block mt-4" />
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                </div>*/
-
             <div className='container bg-white middle of-auto'>
                 <div className="d-flex flex-column align-items-center justify-content-center" >
                     <div>

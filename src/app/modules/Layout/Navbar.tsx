@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {logoutUser} from '../../actions/authActions';
@@ -16,7 +16,6 @@ type State = {
 class Navbar extends Component<Props,State> {
 
     onLogoutClick(e:any){
-        //Olyan href ek keresése amiről elkell vinni az emberkét
         e.preventDefault();
         this.props.logoutUser();
     }

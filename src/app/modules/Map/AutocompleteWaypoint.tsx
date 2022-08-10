@@ -1,13 +1,6 @@
-import React, { FC, useState, useEffect, useRef} from 'react';
+import { FC, useState, useEffect, useRef} from 'react';
 import {connect} from 'react-redux';
-import isEmpty from '../helpers/isEmpty';
-import { Wrapper } from "@googlemaps/react-wrapper";
-import OwnMap from './OwnMap';
-import OwnMarker from './OwnMarker';
-import {setStartPoint, setEndPoint, setWaypoints, setDirectionResult, addWaypoints,delWaypoint} from '../actions/googleMapsActions';
-
-declare type Libraries = ("drawing" | "geometry" | "localContext" | "places" | "visualization")[];
-const googleLibraries:Libraries = ["places"];
+import {setStartPoint, setEndPoint, setWaypoints, setDirectionResult, addWaypoints,delWaypoint} from '../../actions/googleMapsActions';
 
 type Props = {
     id:any;
@@ -24,7 +17,7 @@ type Props = {
     delWaypoint:any;
 };
 
-const OwnAutocompleteWP: FC<Props> = ({id, name, value, onChange, index, waypoints, setStartPoint, setEndPoint, setWaypoints, setDirectionResult, addWaypoints,delWaypoint}) => {
+const AutocompleteWaypoint: FC<Props> = ({id, name, value, onChange, index, waypoints, setStartPoint, setEndPoint, setWaypoints, setDirectionResult, addWaypoints,delWaypoint}) => {
   const [autocomplete, setAutocomplete] = useState<google.maps.places.Autocomplete>();
   let ref = useRef<HTMLInputElement>(null);
   const [compValue, setCompValue] = useState(value);
@@ -94,4 +87,4 @@ const mapStateToProps = (state:any)=>({
     waypoints: state.maps.waypoints
 });
 
-export default connect(mapStateToProps, {setStartPoint, setEndPoint, setWaypoints, setDirectionResult, addWaypoints,delWaypoint})(OwnAutocompleteWP);
+export default connect(mapStateToProps, {setStartPoint, setEndPoint, setWaypoints, setDirectionResult, addWaypoints,delWaypoint})(AutocompleteWaypoint);

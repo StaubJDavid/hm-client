@@ -1,4 +1,4 @@
-import React, { FC, Component, useEffect} from 'react';
+import { FC, useEffect} from 'react';
 import {connect, useDispatch} from 'react-redux';
 import Comment from './Comment';
 import CommentInput from './CommentInput';

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import {Component} from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {BrowserRouter as Router, Route, Routes, Navigate} from 'react-router-dom';
@@ -7,21 +7,12 @@ import store from './store';
 import jwt_decode from 'jwt-decode';
 import setAuthToken from './helpers/setAuthToken';
 import {setCurrentUser, logoutUser} from './actions/authActions';
-import history from "./helpers/history";
 
-//import {WrappedContainer} from './common/withRouter';
-
-//import Routing from './modules/Routing/Routing';
 import Login from './modules/Authentication/Login';
 import Register from './modules/Authentication/Register';
 import MainPage from './modules/MainPage';
 import ContainerPage from './modules/Container/ContainerPage';
-import ProtectThisRoute from './modules/ProtectThisRoute';
-import FileUpload from './modules/FileUpload';
-import FilesUpload from './modules/FilesUpload';
 import Navbar from './modules/Layout/Navbar';
-import MapTest from './modules/MapTest';
-import MapGuide from './modules/MapGuide';
 import CreateContainer from './modules/Container/CreateContainer';
 import ApprovePage from './modules/Approve/ApprovePage';
 
@@ -66,25 +57,10 @@ class App extends Component  {
                       </RedirectIfAuth>
                     } />
 
-                    
-                    <Route path="/protected" element={
-                      <RequireAuth redirectTo="/login" >
-                        <ProtectThisRoute />
-                      </RequireAuth>
-                    } />
-
-                    {/*
-                    <Route path="/images" element={<FilesUpload />} />
-                    <Route path="/maptest" element={<MapGuide />} />
-                    <Route path="/image" element={
-                      <RequireAuth redirectTo="/login" >
-                        <FileUpload />
-                      </RequireAuth>
-                    } />*/}
-
                     <Route path="/container/:c_id" element={<ContainerPage />} />
                     <Route path="/createcontainer" element={<CreateContainer />} />
                     <Route path="/approve" element={<ApprovePage />} />
+                    
                   </Routes>
                 </div>
               </div>

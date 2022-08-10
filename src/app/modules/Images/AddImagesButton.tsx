@@ -1,7 +1,6 @@
-import React, { Component } from "react";
+import { Component } from "react";
 import {connect} from 'react-redux';
 import {addImages, clearImages, deleteImage, uploadImages} from '../../actions/uploadActions';
-import isEmpty from '../../helpers/isEmpty';
 import ShowTempImages from './ShowTempImages';
 
 type Props = {

@@ -7,7 +7,7 @@ import AddImagesButton from '../Images/AddImagesButton';
 import ShowImages from '../Images/ShowImages';
 import {useParams, useNavigate} from 'react-router-dom';
 import isEmpty from '../../helpers/isEmpty';
-import OwnMapStatic from '../OwnMapStatic';
+import StaticMap from '../Map/StaticMap';
 import Comments from './Comments/Comments';
 import TextArea from '../../common/TextArea';
 import Spinner from '../../common/Spinner';
@@ -26,19 +26,13 @@ const ContainerPage: FC<Props> = ({auth,errors,currentContainer,getContainer,cle
     let { c_id } = useParams();
     const navigate = useNavigate();
 
-    const [apiKey,setApiKey] = React.useState("AIzaSyARRtkSAG99I9zFX49zYBttg7tKaGFJExs");
+    const [apiKey,setApiKey] = React.useState(process.env.REACT_APP_GOOGLE_API_KEY!);
 
     const [zoom, setZoom] = React.useState(10); // initial zoom
     const [center, setCenter] = React.useState<google.maps.LatLngLiteral>({
       lat: 47.491853377245285,
       lng: 19.042819149443883,
     });
-
-    /*useEffect(() => {
-        //console.log(c_id);
-        console.log("xd");
-        getContainer(c_id);
-    },[]);*/
 
     useEffect(() => {
         console.log("xd2");
@@ -100,7 +94,7 @@ const ContainerPage: FC<Props> = ({auth,errors,currentContainer,getContainer,cle
             />
             
             <Wrapper apiKey={apiKey} libraries={["places"]}>
-                <OwnMapStatic
+                <StaticMap
                     style={{height:"75vh", width:"100%", margin:"0", padding:"0"}}
                     center={center}
                     zoom={zoom}

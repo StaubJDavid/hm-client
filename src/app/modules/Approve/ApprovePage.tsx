@@ -1,4 +1,4 @@
-import React, {FC, Component,useState, useEffect} from 'react';
+import { FC, useEffect} from 'react';
 import {connect} from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import {getUnapprovedUsers} from '../../actions/adminActions';

@@ -1,9 +1,6 @@
 import {FC} from 'react';
-import {connect} from 'react-redux';
 
 const NoTourResult: FC = () => {
-
-
     return (
         <div className={"card"} >
             <div className={"card-body"} >
@@ -13,7 +10,4 @@ const NoTourResult: FC = () => {
     )
 };
 
-const mapStateToProps = (state:any)=>({
-});
-
-export default connect(mapStateToProps, {})(NoTourResult);
+export default NoTourResult;

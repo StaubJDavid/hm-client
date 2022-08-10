@@ -1,21 +1,7 @@
-import React, { FC, useState, useEffect, useRef, Ref} from 'react';
+import React, { FC, useEffect, useRef} from 'react';
 import {connect} from 'react-redux';
-import {setMap, setDirectionService, setDirectionRenderer, setStartPoint, setEndPoint, setWaypoints, setDirectionResult, removeEmptyEntries} from '../actions/googleMapsActions';
+import {setMap, setDirectionService, setDirectionRenderer, setStartPoint, setEndPoint, setWaypoints, setDirectionResult, removeEmptyEntries} from '../../actions/googleMapsActions';
 import {useDeepCompareMemoize} from 'use-deep-compare-effect';
-
-const containerStyle = {
-    width: '400px',
-    height: '400px'
-  };
-  
-
-
-//import {getContainers} from '../actions/containerActions';
-//import UpcomingContainers from './Container/UpcomingContainers';
-//import Containers from './Container/Containers';
-
-declare type Libraries = ("drawing" | "geometry" | "localContext" | "places" | "visualization")[];
-const googleLibraries:Libraries = ["places"];
 
 interface Props extends google.maps.MapOptions{
     style: { [key: string]:string};
@@ -41,7 +27,7 @@ function useDeepCompareEffectForMaps(
     React.useEffect(callback, dependencies.map(useDeepCompareMemoize));
   }
 
-const OwnMap: FC<Props> = ({onClick,onIdle,children,style,maps,setMap,
+const DynamicMap: FC<Props> = ({onClick,onIdle,children,style,maps,setMap,
     calculateRouteInMap,
     setDirectionService,
     setDirectionRenderer,
@@ -54,23 +40,6 @@ const OwnMap: FC<Props> = ({onClick,onIdle,children,style,maps,setMap,
     const ref = useRef<HTMLDivElement>(null);
 
     const {map, ownDirectionService,ownDirectionRenderer} = maps;
-
-    //const [map, setInMap] = useState<google.maps.Map>();
-
-    /*const [start, setStart] = useState("Herend, Hungary");
-    const [end, setEnd] = useState("Budapest, Hungary");*/
-
-    //Directions Service
-    const [ownDS, setOwnDS] = useState<google.maps.DirectionsService>(new google.maps.DirectionsService());
-
-    //Directions Renderer
-    const [ownDR, setOwnDR] = useState<google.maps.DirectionsRenderer>(new google.maps.DirectionsRenderer());
-    
-    //Directions Result
-    const [ownDResult, setOwnDResult] = useState<google.maps.DirectionsResult>();
-
-    //Directions Status
-    const [ownDStatus, setOwnDStatus] = useState<google.maps.DirectionsStatus>();
 
     function calcRoute(){
         //ownDR.setMap(maps.map!);
@@ -96,11 +65,9 @@ const OwnMap: FC<Props> = ({onClick,onIdle,children,style,maps,setMap,
             } as google.maps.DirectionsRequest
         }
 
-        console.log("called funct");
+        /*console.log("called funct");
         console.log(maps.startPoint);
-        console.log(maps.endPoint);
-
-        
+        console.log(maps.endPoint);*/
 
         if(maps.startPoint !== "" && maps.endPoint !== ""){
             console.log("Calculating route with api");
@@ -120,20 +87,14 @@ const OwnMap: FC<Props> = ({onClick,onIdle,children,style,maps,setMap,
 
     useEffect(() => {
         if (ref.current && !map) {
-            console.log("what");
-            //setInMap(new window.google.maps.Map(ref.current, {}));
+            //console.log("Map is set");
 
             setMap(new window.google.maps.Map(ref.current, {}));
 
-            /*setOwnDS(new window.google.maps.DirectionsService());
-            setOwnDR(new window.google.maps.DirectionsRenderer());*/
             setDirectionService(new window.google.maps.DirectionsService());
             setDirectionRenderer(new window.google.maps.DirectionsRenderer());
             setEndPoint("");
             setStartPoint("");
-
-            setOwnDResult(undefined);
-            setOwnDStatus(undefined);
           }
     },[ref, map]);
 
@@ -173,6 +134,4 @@ const mapStateToProps = (state:any)=>({
     maps: state.maps
 });
 
-export default connect(mapStateToProps, {setMap,setDirectionService,setDirectionRenderer,setStartPoint,setEndPoint,setWaypoints,setDirectionResult,removeEmptyEntries})(OwnMap);
-
-//{height:"100vh", width:"100vw", margin:"0", padding:"0"}
+export default connect(mapStateToProps, {setMap,setDirectionService,setDirectionRenderer,setStartPoint,setEndPoint,setWaypoints,setDirectionResult,removeEmptyEntries})(DynamicMap);

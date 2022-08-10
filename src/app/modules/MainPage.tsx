@@ -1,14 +1,9 @@
-import React, { FC, useState, useEffect} from 'react';
+import { FC, useState, useEffect} from 'react';
 import {connect} from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import CreateContainer from './Container/CreateContainer';
-import PageNavBar from '../common/Pagination/PageNavBar';
 import UpcomingContainers from './Container/UpcomingContainers';
 import PastContainers from './Container/PastContainers';
 import InProgressContainers from './Container/InProgressContainers';
-import isEmpty from '../helpers/isEmpty';
-import MapTest from './MapTest';
-import calculateMaxPage from '../helpers/calculateMaxPage';
 
 
 var classNames = require('classnames');
@@ -25,9 +20,8 @@ const MainPage: FC<Props> = ({auth}) => {
     useEffect(() => {
         setTourContainers(<UpcomingContainers />);
         setCurrentContainerSelection("upcoming")
-    },[])
-//"d-flex pt-4 justify-content-center border-bottom pb-4 border-dark border-3"
-// style={{height: "calc(100% - 65px)"}}
+    },[]);
+    
     return (
 
         <div className={"container bg-white middle"} >

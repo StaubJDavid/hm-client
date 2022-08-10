@@ -1,13 +1,6 @@
-import React, { FC, useState, useEffect, useRef} from 'react';
+import { FC, useState, useEffect, useRef} from 'react';
 import {connect} from 'react-redux';
-import isEmpty from '../helpers/isEmpty';
-import { Wrapper } from "@googlemaps/react-wrapper";
-import OwnMap from './OwnMap';
-import OwnMarker from './OwnMarker';
-import {setStartPoint, setEndPoint, setWaypoints, setDirectionResult, addWaypoints} from '../actions/googleMapsActions';
-
-declare type Libraries = ("drawing" | "geometry" | "localContext" | "places" | "visualization")[];
-const googleLibraries:Libraries = ["places"];
+import {setStartPoint, setEndPoint, setWaypoints, setDirectionResult, addWaypoints} from '../../actions/googleMapsActions';
 
 type Props = {
     id:any;
@@ -22,7 +15,7 @@ type Props = {
     addWaypoints:any;
 };
 
-const OwnAutocomplete: FC<Props> = ({id, name, value, onChange, maps, setStartPoint, setEndPoint, setWaypoints, setDirectionResult,addWaypoints}) => {
+const Autocomplete: FC<Props> = ({id, name, value, onChange, maps, setStartPoint, setEndPoint, setWaypoints, setDirectionResult,addWaypoints}) => {
   const [autocomplete, setAutocomplete] = useState<google.maps.places.Autocomplete>();
   const ref = useRef<HTMLInputElement>(null);
   const [compValue, setCompValue] = useState(value);
@@ -40,16 +33,9 @@ const OwnAutocomplete: FC<Props> = ({id, name, value, onChange, maps, setStartPo
       }
 
       setCompValue(value);
-      /*console.log(value);
-      console.log(compValue);*/
 
       autocomplete?.addListener("place_changed", fillInAddress)
 
-      /*return () => {
-          if(autocomplete){
-              autocomplete.setMap(null);
-          }
-      }*/
   },[autocomplete]);
 
   function fillInAddress() {
@@ -103,5 +89,5 @@ const OwnAutocomplete: FC<Props> = ({id, name, value, onChange, maps, setStartPo
 const mapStateToProps = (state:any)=>({
     maps: state.maps
 });
-
-export default connect(mapStateToProps, {setStartPoint, setEndPoint, setWaypoints, setDirectionResult,addWaypoints})(OwnAutocomplete);
+//OwnAutocomplete
+export default connect(mapStateToProps, {setStartPoint, setEndPoint, setWaypoints, setDirectionResult,addWaypoints})(Autocomplete);

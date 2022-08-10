@@ -1,41 +1,8 @@
 import React, { FC, useState, useEffect, useRef} from 'react';
 import {connect} from 'react-redux';
-import {setMap, setDirectionService, setDirectionRenderer, setStartPoint, setEndPoint, setWaypoints, setDirectionResult, removeEmptyEntries} from '../actions/googleMapsActions';
-import {clearContainer} from '../actions/containerActions';
+import {setDirectionService, setDirectionRenderer} from '../../actions/googleMapsActions';
+import {clearContainer} from '../../actions/containerActions';
 import {useDeepCompareMemoize} from 'use-deep-compare-effect';
-
-const containerStyle = {
-    width: '400px',
-    height: '400px'
-  };
-  
-
-
-//import {getContainers} from '../actions/containerActions';
-//import UpcomingContainers from './Container/UpcomingContainers';
-//import Containers from './Container/Containers';
-
-enum TravelMode {
-    /**
-     * Specifies a bicycling directions request.
-     */
-    BICYCLING = 'BICYCLING',
-    /**
-     * Specifies a driving directions request.
-     */
-    DRIVING = 'DRIVING',
-    /**
-     * Specifies a transit directions request.
-     */
-    TRANSIT = 'TRANSIT',
-    /**
-     * Specifies a walking directions request.
-     */
-    WALKING = 'WALKING',
-  }
-
-declare type Libraries = ("drawing" | "geometry" | "localContext" | "places" | "visualization")[];
-const googleLibraries:Libraries = ["places"];
 
 interface Props extends google.maps.MapOptions{
     style: { [key: string]:string};
@@ -46,15 +13,6 @@ interface Props extends google.maps.MapOptions{
     setDirectionService:any;
     setDirectionRenderer:any;
     clearContainer:any;
-    /*maps:any;
-    setMap:any;
-    setDirectionService:any;
-    setDirectionRenderer:any;
-    setStartPoint:any;
-    setEndPoint:any;
-    setWaypoints:any;
-    setDirectionResult:any;
-    removeEmptyEntries:any;*/
 };
 
 function useDeepCompareEffectForMaps(
@@ -64,7 +22,7 @@ function useDeepCompareEffectForMaps(
     React.useEffect(callback, dependencies.map(useDeepCompareMemoize));
   }
 
-const OwnMap: FC<Props> = ({style,
+const StaticMap: FC<Props> = ({style,
     onZoom,
     startPoint,
     endPoint,
@@ -88,8 +46,8 @@ const OwnMap: FC<Props> = ({style,
 
         //console.log(maps.waypoints);
 
-        console.log(startPoint);
-        console.log(endPoint);
+        /*console.log(startPoint);
+        console.log(endPoint);*/
 
         let request;
         if(waypoints.length === 0){
@@ -110,13 +68,13 @@ const OwnMap: FC<Props> = ({style,
             } as google.maps.DirectionsRequest
         }
         
-        console.log("called funct");
+        //console.log("called funct");
         if(startPoint !== "" && endPoint !== ""){
             ownDS.route(request, (result:any, status:any) => {
                 if(status === 'OK'){
                     //console.log(result);
-                    console.log("Im in???")
-                    console.log(result);
+                    //console.log("Im in???")
+                    //console.log(result);
                     ownDR.setDirections(result);
                 }
             })
@@ -125,10 +83,7 @@ const OwnMap: FC<Props> = ({style,
 
     useEffect(() => {
         if (ref.current && !map) {
-            console.log("what");
-
-            /*setDirectionService(new window.google.maps.DirectionsService());
-            setDirectionRenderer(new window.google.maps.DirectionsRenderer());*/
+            console.log("Static Map is Set");
 
             setMap(new window.google.maps.Map(ref.current, {}));
 
@@ -168,6 +123,4 @@ const OwnMap: FC<Props> = ({style,
 const mapStateToProps = (state:any)=>({
 });
 
-export default connect(mapStateToProps, {setDirectionRenderer, setDirectionService, clearContainer})(OwnMap);
-
-//{height:"100vh", width:"100vw", margin:"0", padding:"0"}
+export default connect(mapStateToProps, {setDirectionRenderer, setDirectionService, clearContainer})(StaticMap);

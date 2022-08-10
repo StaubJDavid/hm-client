@@ -1,15 +1,12 @@
-import React, {FC, Component,useState, useEffect} from 'react';
+import React, {FC, useState, useEffect} from 'react';
 import {connect, useDispatch} from 'react-redux';
 import {getInProgressContainers} from '../../actions/containerActions';
-import AddImagesButton from '../Images/AddImagesButton';
-import ShowImages from '../Images/ShowImages';
 import Container from './Container';
 import PageNavBar from '../../common/Pagination/PageNavBar';
 import isEmpty from '../../helpers/isEmpty';
 
 import {SET_INPROGRESS_CONTAINERS} from '../../actions/types';
 import calculateMaxPage from '../../helpers/calculateMaxPage';
-import ContainerReactions from './ContainerReactions';
 import NoTourResult from './NoTourResult';
 import Spinner from '../../common/Spinner';
 
@@ -22,7 +19,6 @@ const InProgressContainers: FC<Props> = ({inProgressContainers,getInProgressCont
     const dispatch = useDispatch();
     const [currentPage, setCurrentPage] = useState(1);
 
-    //2 is the limit, change it
     useEffect(() => {
         getInProgressContainers((currentPage-1)*5,currentPage, 5);
 

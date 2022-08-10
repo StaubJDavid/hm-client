@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect} from 'react';
+import { FC, useState, useEffect} from 'react';
 import {connect} from 'react-redux';
 import {createContainer, clearContainer} from '../../actions/containerActions';
 import {clearMapsEverything} from '../../actions/googleMapsActions';
@@ -7,9 +7,7 @@ import TextInput from '../../common/TextInput';
 import TextArea from '../../common/TextArea';
 import SelectList from '../../common/SelectList';
 import "bootstrap/js/src/collapse.js";
-import { Navigate } from 'react-router-dom';
-import isEmpty from '../../helpers/isEmpty';
-import MapGuide from '../MapGuide';
+import DynamicMapWrapper from '../Map/DynamicMapWrapper';
 
 type Props = {
     errors:any;
@@ -121,7 +119,7 @@ const CreateContainer: FC<Props> = ({errors,maps,createContainer,clearContainer,
 
                 <h2 className="fw-bold mb-2 mt-4">Túra útvonal</h2>
                 <div>
-                    <MapGuide />
+                    <DynamicMapWrapper />
                 </div>
                 
 
@@ -139,52 +137,3 @@ const mapStateToProps = (state:any)=>({
 });
 
 export default connect(mapStateToProps, {createContainer,clearContainer,clearMapsEverything})(CreateContainer);
-
-/*
-<div className="container">
-                        <div className="row of-auto">
-                            <div className="m-auto">
-                                <p className="lead text-center">Create container</p>
-                                <form className="of-auto" onSubmit={(e:any) => onSubmit(e)}>
-                                    <TextInput
-                                        name="title" 
-                                        value={title}
-                                        error={errors.title} 
-                                        type="text"
-                                        onChange={(e:any) => setTitle(e.target.value)}  
-                                        placeholder="Title"
-                                    />
-                                    <br/>
-                                    <TextArea
-                                        name="message" 
-                                        maxlength={2048}
-                                        value={message}
-                                        error={errors.message} 
-                                        onChange={(e:any) => setMessage(e.target.value)}  
-                                        placeholder="Plan"
-                                    />
-                                    <br/>
-                                    <SelectList
-                                        name="role" 
-                                        value={role}
-                                        error={errors.role} 
-                                        onChange={(e:any) => setRole(e.target.value)}  
-                                        options={options}
-                                        placeholder="Container Type"
-                                    />
-                                    <br/>
-                                    <p>Start Time:</p>
-                                    <input onChange={(e:any) => setTimeStart(e.target.value)} type="datetime-local" name="time_start"></input>
-                                    
-                                    <p>End Time:</p>
-                                    <input onChange={(e:any) => setTimeEnd(e.target.value)} type="datetime-local" name="time_end"></input>
-                                    <br/>
-                                    <br/>
-                                    <br/>
-                                    <MapGuide />
-                                    <input type="submit" className="btn btn-info btn-block mt-4" />
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-*/

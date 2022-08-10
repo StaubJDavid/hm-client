@@ -1,7 +1,4 @@
-import React, { Component } from "react";
-import {connect} from 'react-redux';
-import {addImages, clearImages, deleteImage, uploadImages} from '../../actions/uploadActions';
-import isEmpty from '../../helpers/isEmpty';
+import React from "react";
 import Modal from 'react-bootstrap/Modal';
 
 type ModalProps = {

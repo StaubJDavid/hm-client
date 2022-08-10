@@ -1,7 +1,6 @@
-import React, { FC, useState, useEffect} from 'react';
+import { FC, useState, useEffect} from 'react';
 import {connect} from 'react-redux';
 import {postReaction, postReactionPage} from '../../actions/containerActions';
-import isEmpty from '../../helpers/isEmpty';
 import classnames from 'classnames';
 
 type Props = {
@@ -15,10 +14,6 @@ type Props = {
 };
 
 const ContainerReactions: FC<Props> = ({auth, container, index, disabled, postReaction, containerPage, postReactionPage}) => {
-    const [going, setGoing] = useState(false);
-    const [notGoing, setNotGoing] = useState(false);
-    const [notSure, setNotSure] = useState(false);
-
     const [goingPerson, setGoingPerson] = useState<any[]>([]);
     const [notGoingPerson, setNotGoingPerson] = useState<any[]>([]);
     const [notSurePerson, setNotSurePerson] = useState<any[]>([]);

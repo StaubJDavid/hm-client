@@ -1,13 +1,9 @@
-import React, { FC, useEffect, useState} from 'react';
+import React, { FC, useState} from 'react';
 import {connect} from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Wrapper } from "@googlemaps/react-wrapper";
-import OwnMapStatic from '../OwnMapStatic';
-import {getContainer} from '../../actions/containerActions';
-import AddImagesButton from '../Images/AddImagesButton';
-import ShowImages from '../Images/ShowImages';
+import StaticMap from '../Map/StaticMap';
 import timeFormat from '../../helpers/timeFormat';
-import trimString from '../../helpers/trimString';
 import ContainerReactions from './ContainerReactions';
 import TextArea from '../../common/TextArea';
 var classNames = require('classnames');
@@ -20,7 +16,7 @@ type Props = {
 const Container: FC<Props> = ({container, index, disabled}) => {
     const navigate = useNavigate();
     const [onHover, setOnHover] = useState(false);
-    const [apiKey,setApiKey] = React.useState("AIzaSyARRtkSAG99I9zFX49zYBttg7tKaGFJExs");
+    const [apiKey,setApiKey] = React.useState(process.env.REACT_APP_GOOGLE_API_KEY!);
     const [zoom, setZoom] = React.useState(10); // initial zoom
     const [center, setCenter] = React.useState<google.maps.LatLngLiteral>({
       lat: 47.491853377245285,
@@ -88,7 +84,7 @@ const Container: FC<Props> = ({container, index, disabled}) => {
                         </div>
                         <div className="col" onClick={() => {}}>
                             <Wrapper apiKey={apiKey} libraries={["places"]}>
-                                <OwnMapStatic
+                                <StaticMap
                                     style={{height:"100%", width:"100%", margin:"0", padding:"0"}}
                                     center={center}
                                     zoom={zoom}
@@ -116,6 +112,7 @@ const Container: FC<Props> = ({container, index, disabled}) => {
     )
 };
 
+//Ability to Edit
 const mapStateToProps = (state:any)=>({
 });
 

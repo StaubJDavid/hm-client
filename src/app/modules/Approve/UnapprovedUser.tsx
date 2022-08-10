@@ -1,8 +1,7 @@
-import React, { FC, useEffect} from 'react';
+import { FC } from 'react';
 import {connect} from 'react-redux';
 import {refuseUser, approveUser} from '../../actions/adminActions';
 import TextArea from '../../common/TextArea';
-import timeFormat from '../../helpers/timeFormat';
 
 type Props = {
     user:any;

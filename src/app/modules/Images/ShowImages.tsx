@@ -1,7 +1,6 @@
-import React, { Component, FC } from "react";
+import { FC } from "react";
 import {connect} from 'react-redux';
-import {} from '../../actions/containerActions';
-import isEmpty from '../../helpers/isEmpty';
+//import {} from '../../actions/containerActions';
 import Image from './Image';
 
 type Props = {
@@ -11,7 +10,7 @@ type Props = {
 const ShowImages: FC<Props> = ({container}) => {
 
     const deleteImage = () => {
-
+        //Delete Image if Admin
     }
 
     return (

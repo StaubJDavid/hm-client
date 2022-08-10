@@ -1,7 +1,6 @@
-import React, { FC, useState} from 'react';
+import { FC} from 'react';
 import {connect} from 'react-redux';
 import timeFormat from '../../../helpers/timeFormat';
-import classnames from 'classnames';
 import {deleteComment} from '../../../actions/commentActions';
 import TextArea from '../../../common/TextArea';
 

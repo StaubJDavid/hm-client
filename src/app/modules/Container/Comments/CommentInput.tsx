@@ -1,6 +1,6 @@
 import {FC, useState} from 'react';
 import TextArea from '../../../common/TextArea';
-import {connect, useDispatch} from 'react-redux';
+import {connect} from 'react-redux';
 import {postComment} from '../../../actions/commentActions';
 
 type Props = {
@@ -9,7 +9,6 @@ type Props = {
 }
 
 const CommentInput: FC<Props> = ({container_id, postComment}) => {
-    //const dispatch = useDispatch();
     const [text, setText] = useState("");
 
     return (
